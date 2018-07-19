@@ -1,25 +1,15 @@
 import React, { Component } from "react";
-import { Container, Text, Content } from "native-base";
+import { Container, Text, Content, Button } from "native-base";
 import { connect } from "react-redux";
+import Member from "./route/Member";
+import Guest from "./route/Guest";
 
 class App extends Component {
   render() {
     if (this.props.isLogin) {
-      return (
-        <Container>
-          <Content>
-            <Text> login </Text>
-          </Content>
-        </Container>
-      );
+      return <Member />;
     } else {
-      return (
-        <Container>
-          <Content>
-            <Text> not login </Text>
-          </Content>
-        </Container>
-      );
+      return <Guest />;
     }
   }
 }
