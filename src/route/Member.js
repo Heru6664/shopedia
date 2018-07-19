@@ -17,6 +17,7 @@ const navigation = createStackNavigator(
     Profile: Profile
   },
   {
+    headerMode: "none",
     initialRouteName: "MainScreen"
   }
 );

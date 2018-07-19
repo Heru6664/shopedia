@@ -15,6 +15,7 @@ const navigation = createStackNavigator(
     Login: Login
   },
   {
+    headerMode: "none",
     initialRouteName: "MainScreen"
   }
 );

@@ -1,11 +1,45 @@
 const functions = require("firebase-functions");
+const faker = require("faker");
+const _ = require("lodash");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.products = functions.https.onRequest((request, response) => {
+  const categories = [
+    "Car",
+    "Motorcycle",
+    "Property",
+    "Personal Purpose",
+    "Electronic",
+    "Sport",
+    "Household",
+    "Child",
+    "Industry",
+    "Service"
+  ];
+  response.json({
+    products: _.times(20, index => {
+      return {
+        id: index,
+        name: faker.commerce.productName(),
+        price: faker.commerce.price(),
+        description: faker.lorem.sentences(),
+        category: categories[faker.random.number(9)],
+        like: false,
+        img: "https://picsum.photos/400/500/?random",
+        rating: faker.random.number(5),
+        seller: {
+          sellerName: faker.name.firstName(),
+          sellerImg: faker.image.avatar(),
+          sellerRating: faker.random.number(5),
+          positiveFeedback: faker.random.number(100)
+        },
+        feedback: {
+          costumer: faker.random.word(),
+          comment: faker.random.words()
+        }
+      };
+    })
+  });
+});
 
 exports.loginAuth = functions.https.onRequest((request, response) => {
   const email = request.body.email;

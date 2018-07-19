@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Container, Content, Text } from "native-base";
+import { Container, Content, Text, Header, Title } from "native-base";
 
 class MainScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <Container>
+        <Header>
+          <Title>asd</Title>
+        </Header>
         <Content>
-          <Text> wellcome </Text>
+          <Text> wellcomes </Text>
         </Content>
       </Container>
     );
