@@ -8,11 +8,13 @@ import {
 import Sidebar from "../components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
+import Profile from "../screen/app/Profile";
 
 const navigation = createStackNavigator(
   {
     MainScreen: MainScreen,
-    Login: Login
+    Login: Login,
+    Profile: Profile
   },
   {
     initialRouteName: "MainScreen"

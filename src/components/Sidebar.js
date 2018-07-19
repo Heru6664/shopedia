@@ -4,6 +4,7 @@ import { Container, Content, List, View, Text, ListItem } from "native-base";
 import { connect } from "react-redux";
 
 const routes = [
+  { name: "Profile", route: "Profile" },
   { name: "Dashboard", route: "MainScreen" },
   { name: "Cart", route: "Cart" }
 ];

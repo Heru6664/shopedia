@@ -10,6 +10,7 @@
     "axios": "^0.18.0",
     "lottie-react-native": "^2.5.0",
     "native-base": "^2.7.1",
+    "persist-store": "^3.0.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-navigation": "^2.7.0",
