@@ -19,7 +19,6 @@ class Sidebar extends Component {
   }
   render() {
     const { handlePress } = this.props;
-    console.log("pr", this.props);
     return (
       <Container>
         <Content>

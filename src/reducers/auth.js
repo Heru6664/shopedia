@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   isLogin: false,
-  isLoadingLogin: false
+  isLoadingLogin: false,
+  user: {}
 };
 
 export default (state = initialState, action) => {
@@ -27,7 +28,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLogin: true,
-        isLoadingLogin: false
+        isLoadingLogin: false,
+        user: action.payload
       };
     default:
       return state;

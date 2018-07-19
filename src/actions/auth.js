@@ -1,15 +1,35 @@
 import { LOGIN_START, LOGIN_FAILED, LOGIN_SUCCESS } from "./constant/auth";
+import axios from "axios";
 
-export const loginStart = () => ({
+const loginStart = () => ({
   type: LOGIN_START
 });
 
-export const loginFailed = error => ({
+const loginFailed = error => ({
   type: LOGIN_FAILED,
   payload: error
 });
 
-export const loginSuccess = data => ({
+const loginSuccess = data => ({
   type: LOGIN_SUCCESS,
   payload: data
 });
+
+export const loginAuth = ({ email, password }) => dispatch => {
+  dispatch(loginStart());
+  return axios
+    .post("https://us-central1-shopedia-10ff0.cloudfunctions.net/loginAuth", {
+      email: email,
+      password: password
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch(loginSuccess(res.data));
+      }
+      return res.data;
+    })
+    .catch(e => {
+      dispatch(loginFailed(e));
+      console.log("e: ", e);
+    });
+};
