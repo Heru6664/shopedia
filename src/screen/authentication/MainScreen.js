@@ -20,11 +20,6 @@ class MainScreen extends Component {
   componentDidMount() {
     this.props.fetchProduct();
   }
-  
-  componentDidUpdate(){
-    
-    console.log("prop", this.props);
-  }
 
   render() {
     return (
@@ -35,7 +30,7 @@ class MainScreen extends Component {
               onPress={() => this.props.navigation.openDrawer()}
               transparent
             >
-              <Icon name="menu" />
+              <Icon name="ios-menu" type="Ionicons" />
             </Button>
           </Left>
           <Body />
