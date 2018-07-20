@@ -14,16 +14,21 @@ import {
   Body,
   Right,
   Thumbnail,
-  H2
+  H2,
+  Footer,
+  FooterTab,
+  View
 } from "native-base";
 import StarRating from "react-native-star-rating";
 import { Image, TouchableOpacity } from "react-native";
 import styles from "./styles/ProductDesc";
+import { addWishlist } from "../../actions/wishlist";
 
 class ProductDesc extends Component {
   state = {
     like: false
   };
+
   render() {
     return (
       <Container style={styles.container}>
@@ -153,6 +158,43 @@ class ProductDesc extends Component {
             </Card>
           </TouchableOpacity>
         </Content>
+        <Footer>
+          <FooterTab>
+            <View style={styles.leftIcon}>
+              <Button
+                onPress={() => this.props.addWishlist(this.props.detail)}
+                transparent
+              >
+                {this.props.detail.like ? (
+                  <Icon style={styles.ion} type="Ionicons" name="ios-heart" />
+                ) : (
+                  <Icon
+                    style={styles.ion}
+                    type="SimpleLineIcons"
+                    name="heart"
+                  />
+                )}
+              </Button>
+            </View>
+            <View style={styles.leftIcon}>
+              <Button badge vertical transparent>
+                {/* {this.props.length.length === 0 ? null : (
+                  <Badge info>
+                    <Text>{this.props.length.length}</Text>
+                  </Badge>
+                )} */}
+
+                <Icon style={styles.ion} type="EvilIcons" name="cart" />
+              </Button>
+            </View>
+            <Button style={styles.leftTab} transparent>
+              <Text style={styles.text}>Add to cart</Text>
+            </Button>
+            <Button on style={styles.rightTab} transparent>
+              <Text style={styles.text}>Buy Now</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }
@@ -162,8 +204,11 @@ const mapStateToProps = ({ detail }) => ({
   detail: detail.detailProduct
 });
 
-// const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
+  addWishlist: item => dispatch(addWishlist(item))
+});
 
-// })
-
-export default connect(mapStateToProps)(ProductDesc);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDesc);

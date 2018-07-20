@@ -4,6 +4,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  loadingContainer: {
+    alignItems: "center"
+  },
   footerContent: {},
   header: {
     alignItems: "center"

@@ -1,1 +1,2 @@
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
+export const UPDATE_LIKE = "UPDATE_LIKE";

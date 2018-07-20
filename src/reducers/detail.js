@@ -1,4 +1,4 @@
-import { GET_DETAIL_PRODUCT } from "../actions/constant/detail";
+import { GET_DETAIL_PRODUCT, UPDATE_LIKE } from "../actions/constant/detail";
 
 const initialState = {
   detailProduct: {}
@@ -10,6 +10,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         detailProduct: action.payload
+      };
+    case UPDATE_LIKE:
+      return {
+        ...state,
+        detailProduct: {
+          ...state.detailProduct,
+          like: true
+        }
       };
     default:
       return state;

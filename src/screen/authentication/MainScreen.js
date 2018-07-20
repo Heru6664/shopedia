@@ -9,13 +9,15 @@ import {
   Button,
   Icon,
   Body,
-  Spinner
+  Spinner,
+  View
 } from "native-base";
 import styles from "./styles/MainScreen";
 import { FlatList } from "react-native";
 import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
+import Loading from "../../assets/components/Loading";
 
 class MainScreen extends Component {
   componentDidMount() {
@@ -43,7 +45,11 @@ class MainScreen extends Component {
         </Header>
         <Content>
           <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
-          {this.props.loading ? <Spinner /> : null}
+          <View style={styles.loadingContainer}>
+            {this.props.loading ? (
+              <Loading style={{ width: 45, height: 45 }} />
+            ) : null}
+          </View>
           <FlatList
             data={this.props.content}
             renderItem={({ item }) => (
@@ -61,7 +67,7 @@ class MainScreen extends Component {
 const mapStateToProps = ({ auth, product }) => {
   return {
     auth,
-    content: product.product.products,
+    content: product.product,
     loading: product.loading
   };
 };
