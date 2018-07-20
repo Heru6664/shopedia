@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Animation from "lottie-react-native";
 import {
   Container,
   Content,
@@ -11,6 +10,7 @@ import {
 } from "native-base";
 import t from "tcomb-form-native";
 import { connect } from "react-redux";
+import Loading from "../../assets/components/Loading";
 import { loginAuth } from "../../actions/auth";
 import styles from "./styles/Login";
 
@@ -60,10 +60,6 @@ class Login extends Component {
     };
   }
 
-  componentWillMount() {
-    this.initAnimation();
-  }
-
   onChangeValue = value => {
     a = {};
     this.setState({
@@ -78,16 +74,6 @@ class Login extends Component {
 
     this.props.loginAuth(this.state);
   };
-
-  initAnimation() {
-    if (!this.animation) {
-      setTimeout(() => {
-        this.initAnimation();
-      }, 100);
-    } else {
-      this.animation.play();
-    }
-  }
 
   render() {
     return (
@@ -105,14 +91,7 @@ class Login extends Component {
               <Content>
                 <Left />
                 <Body>
-                  <Animation
-                    ref={animation => {
-                      this.animation = animation;
-                    }}
-                    style={styles.animation}
-                    loop
-                    source={require("../../assets/images/lottie/data.json")}
-                  />
+                  <Loading style={styles.animation} />
                 </Body>
                 <Right />
               </Content>
