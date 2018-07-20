@@ -15,11 +15,17 @@ import styles from "./styles/MainScreen";
 import { FlatList } from "react-native";
 import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
+import { getDetail } from "../../actions/detail";
 
 class MainScreen extends Component {
   componentDidMount() {
     this.props.fetchProduct();
   }
+
+  pressProduct = item => {
+    this.props.getDetail(item);
+    this.props.navigation.navigate("ProductDesc");
+  };
 
   render() {
     return (
@@ -40,7 +46,9 @@ class MainScreen extends Component {
           {this.props.loading ? <Spinner /> : null}
           <FlatList
             data={this.props.content}
-            renderItem={({ item }) => <DashboardContent item={item} />}
+            renderItem={({ item }) => (
+              <DashboardContent pressProduct={this.pressProduct} item={item} />
+            )}
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
           />
@@ -59,7 +67,8 @@ const mapStateToProps = ({ auth, product }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchProduct: product => dispatch(fetchProduct(product))
+  fetchProduct: product => dispatch(fetchProduct(product)),
+  getDetail: detail => dispatch(getDetail(detail))
 });
 
 export default connect(

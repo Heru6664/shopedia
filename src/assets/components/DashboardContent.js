@@ -2,8 +2,8 @@ import React from "react";
 import { CardItem, Card, Text } from "native-base";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 
-export default ({ item }) => (
-  <TouchableOpacity style={styles.th}>
+export default ({ item, pressProduct }) => (
+  <TouchableOpacity onPress={() => pressProduct(item)} style={styles.th}>
     <Card>
       <CardItem>
         <Text>{item.name}</Text>

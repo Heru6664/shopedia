@@ -43,13 +43,13 @@ const routes = [
   },
   {
     type: "Ionicons",
-    iconName: "ios-car-outline",
+    iconName: "ios-car",
     name: "Motors & Accessories",
     route: "Accessories"
   },
   {
     type: "Ionicons",
-    iconName: "ios-book-outline",
+    iconName: "ios-book",
     name: "Books, Media & Music",
     route: "Media"
   }
@@ -58,13 +58,13 @@ const routes = [
 
 // -- config menu -- //
 const configGuest = [
-  { name: "Dashboard", route: "MainScreen" },
+  { name: "Setting", route: "Setting" },
   { name: "Login", route: "Login" }
 ];
 const routesConfig = [
-  { name: "Profile", route: "Profile" },
-  { name: "Dashboard", route: "MainScreen" },
-  { name: "Cart", route: "Cart" }
+  { name: "Whislist", route: "Whislist" },
+  { name: "Cart", route: "Cart" },
+  { name: "Setting", route: "Setting" }
 ];
 // -- end config menu -- //
 
@@ -111,7 +111,6 @@ class Sidebar extends Component {
                   </View>
                 );
               }}
-              keyExtractor={(item, index) => index.toString()}
             />
           </View>
           <View>

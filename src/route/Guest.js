@@ -8,11 +8,13 @@ import {
 import Sidebar from "../assets/components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
+import ProductDesc from "../screen/app/ProductDesc";
 
 const navigation = createStackNavigator(
   {
     MainScreen: MainScreen,
-    Login: Login
+    Login: Login,
+    ProductDesc: ProductDesc
   },
   {
     headerMode: "none",
