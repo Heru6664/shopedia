@@ -9,15 +9,27 @@ import {
   Button,
   Icon,
   Body,
-  Spinner,
-  View
+  View,
+  Right
 } from "native-base";
 import styles from "./styles/MainScreen";
-import { FlatList } from "react-native";
+import { FlatList, StatusBar, Platform, StyleSheet } from "react-native";
 import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
 import Loading from "../../assets/components/Loading";
+
+const MyStatusBar = ({ backgroundColor, ...props }) => (
+  <View style={[statusBar.statusBar, { backgroundColor }]}>
+    <StatusBar
+      translucent
+      backgroundColor={backgroundColor}
+      {...props}
+      barStyle="light-content"
+    />
+    <View style={statusBar.appBar} />
+  </View>
+);
 
 class MainScreen extends Component {
   componentDidMount() {
@@ -32,16 +44,36 @@ class MainScreen extends Component {
   render() {
     return (
       <Container>
+        <MyStatusBar backgroundColor="#5E8D48" />
         <Header style={styles.header}>
-          <Left>
-            <Button
-              onPress={() => this.props.navigation.openDrawer()}
-              transparent
-            >
-              <Icon name="ios-menu" type="Ionicons" />
-            </Button>
+          <Left style={styles.left}>
+            <View style={styles.menuContainer}>
+              <Button
+                onPress={() => this.props.navigation.openDrawer()}
+                transparent
+              >
+                <Icon name="ios-menu" type="Ionicons" />
+              </Button>
+            </View>
+            <View style={styles.searchContainer}>
+              <Button
+                onPress={() => this.props.navigation.openDrawer()}
+                transparent
+              >
+                <Icon name="search" type="EvilIcons" />
+              </Button>
+            </View>
           </Left>
           <Body />
+          <Right>
+            <Button transparent>
+              <Icon
+                style={styles.buttonHeadRight}
+                type="EvilIcons"
+                name="cart"
+              />
+            </Button>
+          </Right>
         </Header>
         <Content>
           <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
@@ -64,6 +96,18 @@ class MainScreen extends Component {
   }
 }
 
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
+
+const statusBar = StyleSheet.create({
+  statusBar: {
+    height: STATUSBAR_HEIGHT
+  },
+  appBar: {
+    backgroundColor: "#0a8f09",
+    height: APPBAR_HEIGHT
+  }
+});
 const mapStateToProps = ({ auth, product }) => {
   return {
     auth,

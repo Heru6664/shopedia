@@ -7,7 +7,6 @@ import {
   View,
   Text,
   ListItem,
-  Header,
   H3,
   Icon,
   Left
@@ -25,7 +24,7 @@ const routes = [
   },
   {
     type: "Ionicons",
-    iconName: "ios-shirt-outline",
+    iconName: "ios-shirt",
     name: "Fashion & Lifestyle",
     route: "Fashions"
   },
