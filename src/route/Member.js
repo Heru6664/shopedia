@@ -5,7 +5,7 @@ import {
   DrawerActions
 } from "react-navigation";
 
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../assets/components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
 import Profile from "../screen/app/Profile";

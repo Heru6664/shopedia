@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import styles from "./styles/MainScreen";
 import { FlatList } from "react-native";
-import DashboardContent from "../../components/DashboardContent";
+import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
 
 class MainScreen extends Component {
