@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   FETCH_PRODUCT_FAILED,
+  FETCH_PRODUCT_START,
   FETCH_PRODUCT_SUCCESS
 } from "./constant/product";
 
@@ -21,7 +22,7 @@ export const fetchProduct = () => dispatch => {
   return axios
     .get("https://us-central1-shopedia-10ff0.cloudfunctions.net/products")
     .then(data => {
-      dispatch(fetchSuccess(data));
+      dispatch(fetchSuccess(data.data));
     })
     .catch(err => {
       dispatch(fetchFailed(err));
