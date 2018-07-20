@@ -42,6 +42,7 @@ class MainScreen extends Component {
             data={this.props.content}
             renderItem={({ item }) => <DashboardContent item={item} />}
             numColumns={2}
+            keyExtractor={(item, index) => index.toString()}
           />
         </Content>
       </Container>
