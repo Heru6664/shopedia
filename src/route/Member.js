@@ -9,12 +9,14 @@ import Sidebar from "../assets/components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
 import Profile from "../screen/app/Profile";
+import ProductDesc from "../screen/app/ProductDesc";
 
 const navigation = createStackNavigator(
   {
     MainScreen: MainScreen,
     Login: Login,
-    Profile: Profile
+    Profile: Profile,
+    ProductDesc: ProductDesc
   },
   {
     headerMode: "none",
