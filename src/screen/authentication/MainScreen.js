@@ -43,6 +43,10 @@ class MainScreen extends Component {
     this.props.navigation.navigate("ProductDesc");
   };
 
+  handleCart = () => {
+    this.props.navigation.navigate("Cart");
+  };
+
   render() {
     return (
       <Container>
@@ -65,22 +69,40 @@ class MainScreen extends Component {
           </Left>
           <Body />
           <Right>
-            <View style={{ flexDirection: "row", marginRight: -10, right: 0 }}>
+            <View style={styles.buttonRightContainer}>
               <TouchableOpacity style={styles.gridICont}>
                 <Icon style={styles.iGrid} name="grid" type="SimpleLineIcons" />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonHeadRightContainer}>
-                <Icon
-                  style={styles.buttonHeadRight}
-                  type="EvilIcons"
-                  name="cart"
-                />
-                {this.props.cartLength === 0 ? null : (
-                  <Badge style={styles.badge} danger>
-                    <Text>{this.props.cartLength}</Text>
-                  </Badge>
-                )}
-              </TouchableOpacity>
+              {this.props.auth.isLogin ? (
+                <TouchableOpacity
+                  onPress={() => this.handleCart()}
+                  style={styles.buttonHeadRightContainer}
+                >
+                  <Icon
+                    style={styles.buttonHeadRight}
+                    type="EvilIcons"
+                    name="cart"
+                  />
+                  {this.props.cartLength === 0 ? null : (
+                    <Badge style={styles.badge} danger>
+                      <Text>{this.props.cartLength}</Text>
+                    </Badge>
+                  )}
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity style={styles.buttonHeadRightContainer}>
+                  <Icon
+                    style={styles.buttonHeadRight}
+                    type="MaterialCommunityIcons"
+                    name="account-circle"
+                  />
+                  {this.props.cartLength === 0 ? null : (
+                    <Badge style={styles.badge} danger>
+                      <Text>{this.props.cartLength}</Text>
+                    </Badge>
+                  )}
+                </TouchableOpacity>
+              )}
             </View>
           </Right>
         </Header>

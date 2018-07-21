@@ -10,12 +10,14 @@ import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
 import Profile from "../screen/app/Profile";
 import ProductDesc from "../screen/app/ProductDesc";
+import Cart from "../screen/order/Cart";
 
 const navigation = createStackNavigator(
   {
     MainScreen: MainScreen,
     Login: Login,
     Profile: Profile,
+    Cart: Cart,
     ProductDesc: ProductDesc
   },
   {
