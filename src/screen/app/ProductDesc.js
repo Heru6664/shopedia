@@ -180,13 +180,12 @@ class ProductDesc extends Component {
             </View>
             <View style={styles.leftIcon}>
               <Button badge vertical transparent>
+                <Icon style={styles.ion} type="EvilIcons" name="cart" />
                 {this.props.cartLength === 0 ? null : (
                   <Badge style={styles.badge} danger>
                     <Text>{this.props.cartLength}</Text>
                   </Badge>
                 )}
-
-                <Icon style={styles.ion} type="EvilIcons" name="cart" />
               </Button>
             </View>
             <Button

@@ -7,9 +7,27 @@ const styles = StyleSheet.create({
   left: {
     flexDirection: "row"
   },
-  buttonHeadRight: {
-    color: "white"
+  buttonHeadRightContainer: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center"
   },
+  buttonRightContainer: {
+    flexDirection: "row",
+    marginRight: -10,
+    right: 0
+  },
+  gridICont: {
+    width: 30,
+    height: 30,
+    marginTop: 10,
+    marginRight: 4,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  iGrid: { fontSize: 23, color: "white" },
+  buttonHeadRight: { color: "white", fontSize: 30 },
   menuContainer: {
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
@@ -24,7 +42,14 @@ const styles = StyleSheet.create({
     width: "100%",
     width: 230
   },
-
+  badge: {
+    position: "absolute",
+    right: 5,
+    top: 0,
+    width: 20,
+    height: 22,
+    paddingLeft: 3
+  },
   loadingContainer: {
     alignItems: "center"
   },

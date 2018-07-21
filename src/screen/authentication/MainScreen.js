@@ -10,10 +10,17 @@ import {
   Icon,
   Body,
   View,
-  Right
+  Right,
+  Badge
 } from "native-base";
 import styles from "./styles/MainScreen";
-import { FlatList, StatusBar, Platform, StyleSheet } from "react-native";
+import {
+  FlatList,
+  StatusBar,
+  Platform,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
@@ -58,13 +65,23 @@ class MainScreen extends Component {
           </Left>
           <Body />
           <Right>
-            <Button transparent>
-              <Icon
-                style={styles.buttonHeadRight}
-                type="EvilIcons"
-                name="cart"
-              />
-            </Button>
+            <View style={{ flexDirection: "row", marginRight: -10, right: 0 }}>
+              <TouchableOpacity style={styles.gridICont}>
+                <Icon style={styles.iGrid} name="grid" type="SimpleLineIcons" />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonHeadRightContainer}>
+                <Icon
+                  style={styles.buttonHeadRight}
+                  type="EvilIcons"
+                  name="cart"
+                />
+                {this.props.cartLength === 0 ? null : (
+                  <Badge style={styles.badge} danger>
+                    <Text>{this.props.cartLength}</Text>
+                  </Badge>
+                )}
+              </TouchableOpacity>
+            </View>
           </Right>
         </Header>
         <Content>
@@ -100,8 +117,9 @@ const statusBar = StyleSheet.create({
     height: APPBAR_HEIGHT
   }
 });
-const mapStateToProps = ({ auth, product }) => {
+const mapStateToProps = ({ auth, product, cart }) => {
   return {
+    cartLength: cart.cart.length,
     auth,
     content: product.product,
     loading: product.loading
