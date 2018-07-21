@@ -9,11 +9,13 @@ import Sidebar from "../assets/components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
 import ProductDesc from "../screen/app/ProductDesc";
+import Cart from "../screen/order/Cart";
 
 const navigation = createStackNavigator(
   {
     MainScreen: MainScreen,
     Login: Login,
+    Cart: Cart,
     ProductDesc: ProductDesc
   },
   {

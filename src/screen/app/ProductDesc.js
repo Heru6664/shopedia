@@ -163,20 +163,37 @@ class ProductDesc extends Component {
         <Footer>
           <FooterTab>
             <View style={styles.leftIcon}>
-              <Button
-                onPress={() => this.props.addWishlist(this.props.detail)}
-                transparent
-              >
-                {this.props.detail.like ? (
-                  <Icon style={styles.ion} type="Ionicons" name="ios-heart" />
-                ) : (
-                  <Icon
-                    style={styles.ion}
-                    type="SimpleLineIcons"
-                    name="heart"
-                  />
-                )}
-              </Button>
+              {this.props.isLogin ? (
+                <Button
+                  onPress={() => this.props.addWishlist(this.props.detail)}
+                  transparent
+                >
+                  {this.props.detail.like ? (
+                    <Icon style={styles.ion} type="Ionicons" name="ios-heart" />
+                  ) : (
+                    <Icon
+                      style={styles.ion}
+                      type="SimpleLineIcons"
+                      name="heart"
+                    />
+                  )}
+                </Button>
+              ) : (
+                <Button
+                  onPress={() => this.props.navigation.navigate("Login")}
+                  transparent
+                >
+                  {this.props.detail.like ? (
+                    <Icon style={styles.ion} type="Ionicons" name="ios-heart" />
+                  ) : (
+                    <Icon
+                      style={styles.ion}
+                      type="SimpleLineIcons"
+                      name="heart"
+                    />
+                  )}
+                </Button>
+              )}
             </View>
             <View style={styles.leftIcon}>
               <Button
@@ -210,7 +227,8 @@ class ProductDesc extends Component {
   }
 }
 
-const mapStateToProps = ({ detail, cart }) => ({
+const mapStateToProps = ({ detail, cart, auth }) => ({
+  isLogin: auth.isLogin,
   detail: detail.detailProduct,
   cartLength: cart.cart.length
 });

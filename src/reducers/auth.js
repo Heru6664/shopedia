@@ -5,7 +5,7 @@ import {
 } from "../actions/constant/auth";
 
 const initialState = {
-  isLogin: true,
+  isLogin: false,
   isLoadingLogin: false,
   user: {}
 };

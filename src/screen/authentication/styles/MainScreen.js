@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#42b549",
     borderBottomWidth: 0
   },
+
   iconHead: {
     color: "#000"
   },

@@ -44,6 +44,7 @@ class MainScreen extends Component {
   };
 
   handleCart = () => {
+    console.log("asd: ", this.props);
     this.props.navigation.navigate("Cart");
   };
 
@@ -73,39 +74,27 @@ class MainScreen extends Component {
               <TouchableOpacity style={styles.gridICont}>
                 <Icon style={styles.iGrid} name="grid" type="SimpleLineIcons" />
               </TouchableOpacity>
-              {this.props.auth.isLogin ? (
-                <TouchableOpacity
-                  onPress={() => this.handleCart()}
-                  style={styles.buttonHeadRightContainer}
-                >
-                  <Icon
-                    style={styles.buttonHeadRight}
-                    type="EvilIcons"
-                    name="cart"
-                  />
-                  {this.props.cartLength === 0 ? null : (
-                    <Badge style={styles.badge} danger>
-                      <Text>{this.props.cartLength}</Text>
-                    </Badge>
-                  )}
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity style={styles.buttonHeadRightContainer}>
-                  <Icon
-                    style={styles.buttonHeadRight}
-                    type="MaterialCommunityIcons"
-                    name="account-circle"
-                  />
-                  {this.props.cartLength === 0 ? null : (
-                    <Badge style={styles.badge} danger>
-                      <Text>{this.props.cartLength}</Text>
-                    </Badge>
-                  )}
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity
+                onPress={() => this.handleCart()}
+                style={styles.buttonHeadRightContainer}
+              >
+                <Icon
+                  style={styles.buttonHeadRight}
+                  type="EvilIcons"
+                  name="cart"
+                />
+                {this.props.cartLength === 0 ? null : (
+                  <Badge style={styles.badge} danger>
+                    <Text>{this.props.cartLength}</Text>
+                  </Badge>
+                )}
+              </TouchableOpacity>
             </View>
           </Right>
         </Header>
+        
+          <View>asd</View>
+        </ScrollableTabView>
         <Content>
           <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
           <View style={styles.loadingContainer}>
