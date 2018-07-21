@@ -21,12 +21,7 @@ import Loading from "../../assets/components/Loading";
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[statusBar.statusBar, { backgroundColor }]}>
-    <StatusBar
-      translucent
-      backgroundColor={backgroundColor}
-      {...props}
-      barStyle="light-content"
-    />
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     <View style={statusBar.appBar} />
   </View>
 );
@@ -44,7 +39,7 @@ class MainScreen extends Component {
   render() {
     return (
       <Container>
-        <MyStatusBar backgroundColor="#5E8D48" />
+        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header style={styles.header}>
           <Left style={styles.left}>
             <View style={styles.menuContainer}>
@@ -56,10 +51,7 @@ class MainScreen extends Component {
               </Button>
             </View>
             <View style={styles.searchContainer}>
-              <Button
-                onPress={() => this.props.navigation.openDrawer()}
-                transparent
-              >
+              <Button transparent>
                 <Icon name="search" type="EvilIcons" />
               </Button>
             </View>

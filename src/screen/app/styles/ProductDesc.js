@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(0,0,0, 0.2)"
+    backgroundColor: "#f1f0f1"
   },
   content: {
     padding: 10,
@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
   },
   leftTab: {
     backgroundColor: "#f39c12"
+  },
+  badge: {
+    position: "absolute",
+    right: 5,
+    top: 0,
+    width: 20,
+    height: 22,
+    paddingLeft: 3
   },
   rightTab: {
     backgroundColor: "#e74c3c"

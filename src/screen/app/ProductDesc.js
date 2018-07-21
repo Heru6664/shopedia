@@ -17,12 +17,14 @@ import {
   H2,
   Footer,
   FooterTab,
+  Badge,
   View
 } from "native-base";
 import StarRating from "react-native-star-rating";
 import { Image, TouchableOpacity } from "react-native";
 import styles from "./styles/ProductDesc";
 import { addWishlist } from "../../actions/wishlist";
+import { addItemCart } from "../../actions/cart";
 
 class ProductDesc extends Component {
   state = {
@@ -178,16 +180,20 @@ class ProductDesc extends Component {
             </View>
             <View style={styles.leftIcon}>
               <Button badge vertical transparent>
-                {/* {this.props.length.length === 0 ? null : (
-                  <Badge info>
-                    <Text>{this.props.length.length}</Text>
+                {this.props.cartLength === 0 ? null : (
+                  <Badge style={styles.badge} danger>
+                    <Text>{this.props.cartLength}</Text>
                   </Badge>
-                )} */}
+                )}
 
                 <Icon style={styles.ion} type="EvilIcons" name="cart" />
               </Button>
             </View>
-            <Button style={styles.leftTab} transparent>
+            <Button
+              onPress={() => this.props.addToCart(this.props.detail)}
+              style={styles.leftTab}
+              transparent
+            >
               <Text style={styles.text}>Add to cart</Text>
             </Button>
             <Button on style={styles.rightTab} transparent>
@@ -200,12 +206,14 @@ class ProductDesc extends Component {
   }
 }
 
-const mapStateToProps = ({ detail }) => ({
-  detail: detail.detailProduct
+const mapStateToProps = ({ detail, cart }) => ({
+  detail: detail.detailProduct,
+  cartLength: cart.cart.length
 });
 
 const mapDispatchToProps = dispatch => ({
-  addWishlist: item => dispatch(addWishlist(item))
+  addWishlist: item => dispatch(addWishlist(item)),
+  addToCart: itemCart => dispatch(addItemCart(itemCart))
 });
 
 export default connect(

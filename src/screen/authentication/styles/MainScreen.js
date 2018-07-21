@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     width: "100%",
     width: 230
   },
+
   loadingContainer: {
     alignItems: "center"
   },
