@@ -34,7 +34,7 @@ class EmptyCart extends Component {
         <Text>Your cart is empty :(</Text>
         <Button
           style={styles.button}
-          onPress={() => this.props.navigation.navigate("Dashboard")}
+          onPress={() => this.props.navigation.navigate("MainScreen")}
         >
           <Text style={styles.buttonText}>Buy something now!</Text>
         </Button>
@@ -82,9 +82,9 @@ class Cart extends Component {
           <Icon name="add" />
         </Button>
         <Right>
-          <Button onPress={() => this.handleDelete(item.id)} stransparent>
+          <Button onPress={() => this.handleDelete(item.id)} transparent>
             <Text>Delete</Text>
-            <Icon name="trash" />
+            <Icon type="EvilIcons" name="trash" />
           </Button>
         </Right>
       </CardItem>
@@ -113,6 +113,7 @@ class Cart extends Component {
               <FlatList
                 data={this.props.cart.cart}
                 renderItem={({ item }) => this.renderItem(item)}
+                keyExtractor={(item, index) => index.toString()}
               />
             </Content>
             <Footer>

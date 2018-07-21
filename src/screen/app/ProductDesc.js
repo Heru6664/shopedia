@@ -179,7 +179,12 @@ class ProductDesc extends Component {
               </Button>
             </View>
             <View style={styles.leftIcon}>
-              <Button badge vertical transparent>
+              <Button
+                onPress={() => this.props.navigation.navigate("Cart")}
+                badge
+                vertical
+                transparent
+              >
                 <Icon style={styles.ion} type="EvilIcons" name="cart" />
                 {this.props.cartLength === 0 ? null : (
                   <Badge style={styles.badge} danger>
