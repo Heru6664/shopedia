@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
   footerContainer: {
     marginVertical: "2%"
   },
+  logoutButton: {
+    borderTopWidth: 0,
+    marginRight: 0,
+    backgroundColor: "white"
+  },
   logoutText: {
     position: "relative",
     justifyContent: "center",

@@ -1,4 +1,9 @@
-import { LOGIN_START, LOGIN_FAILED, LOGIN_SUCCESS } from "./constant/auth";
+import {
+  LOGIN_START,
+  LOGIN_FAILED,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from "./constant/auth";
 import axios from "axios";
 
 const loginStart = () => ({
@@ -33,3 +38,7 @@ export const loginAuth = ({ email, password }) => dispatch => {
       console.log("e: ", e);
     });
 };
+
+export const logout = () => ({
+  type: LOGOUT
+});

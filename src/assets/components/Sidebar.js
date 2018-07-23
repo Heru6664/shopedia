@@ -9,10 +9,13 @@ import {
   ListItem,
   H3,
   Icon,
-  Left
+  Left,
+  Footer,
+  Button
 } from "native-base";
 import { Image } from "react-native";
 import styles from "./styles/Sidebar";
+import { logout } from "../../actions/auth";
 
 // -- product by category -- //
 const routes = [
@@ -127,6 +130,19 @@ class Sidebar extends Component {
             />
           </View>
         </Content>
+        {this.props.isLogin ? (
+          <Footer style={styles.logoutButton}>
+            <Button
+              style={styles.footerContainer}
+              onPress={() => this.props.logout()}
+              rounded
+              bordered
+              dark
+            >
+              <Text style={styles.logoutText}>Logout</Text>
+            </Button>
+          </Footer>
+        ) : null}
       </Container>
     );
   }
@@ -136,4 +152,11 @@ mapStateToProps = ({ auth }) => ({
   isLogin: auth.isLogin
 });
 
-export default connect(mapStateToProps)(Sidebar);
+const mapDispatchToProps = dispatch => ({
+  logout: clearUser => dispatch(logout(clearUser))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Sidebar);
