@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
     fontSize: 200,
     color: "rgba(0,0,0, 0.5)"
   },
+  contentProd: {
+    marginHorizontal: 10,
+    borderBottomColor: "grey",
+    borderBottomWidth: 0.5
+  },
   button: {
     marginTop: "5%",
     borderColor: "rgba(0,0,0, 0.5)",

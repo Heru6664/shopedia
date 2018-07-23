@@ -20,7 +20,7 @@ import {
   View
 } from "native-base";
 import { FlatList, TouchableOpacity } from "react-native";
-import { remvFromCart } from "../../actions/cart";
+import { remvFromCart, incTotal, decTotal } from "../../actions/cart";
 import styles from "./style/Cart";
 
 class EmptyCart extends Component {
@@ -54,10 +54,18 @@ class Cart extends Component {
   handleDelete = id => {
     this.props.delete(id);
   };
-
+  calculateTotalVal = () => {
+    let val = 0;
+    this.props.cart.cart.forEach(data => {
+      for (let a = 0; a < data.total; a++) {
+        val += parseFloat(data.price);
+      }
+    });
+    return val;
+  };
   renderItem = item => (
     <Card>
-      <TouchableOpacity>
+      <TouchableOpacity style={styles.contentProd}>
         <CardItem>
           <CardItem>
             <Left>
@@ -74,11 +82,11 @@ class Cart extends Component {
         </CardItem>
       </TouchableOpacity>
       <CardItem>
-        <Button transparent>
+        <Button onPress={() => this.props.decTotal(item)} transparent>
           <Icon name="minus" type="Entypo" />
         </Button>
         <Text>{item.total}</Text>
-        <Button transparent>
+        <Button onPress={() => this.props.incTotal(item)} transparent>
           <Icon name="add" />
         </Button>
         <Right>
@@ -116,15 +124,15 @@ class Cart extends Component {
                 keyExtractor={(item, index) => index.toString()}
               />
             </Content>
-            <Footer>
-              <FooterTab>
-                <View>
+            <Footer style={styles.footer}>
+              <FooterTab style={styles.footerTabContainer}>
+                <View style={styles.vw}>
                   <CardItem>
                     <Text>Total Amount:</Text>
                     <Body />
                     <Right>
                       <Text style={styles.amount}>
-                        {/* $ {this.calculateTotalVal()} */}
+                        $ {this.calculateTotalVal()}
                       </Text>
                     </Right>
                   </CardItem>
@@ -156,7 +164,9 @@ const mapStateToProps = ({ cart }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  delete: item => dispatch(remvFromCart(item))
+  delete: item => dispatch(remvFromCart(item)),
+  incTotal: totalUp => dispatch(incTotal(totalUp)),
+  decTotal: totalDwn => dispatch(decTotal(totalDwn))
 });
 
 export default connect(

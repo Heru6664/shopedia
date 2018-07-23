@@ -92,9 +92,7 @@ class MainScreen extends Component {
             </View>
           </Right>
         </Header>
-        
-          <View>asd</View>
-        </ScrollableTabView>
+
         <Content>
           <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
           <View style={styles.loadingContainer}>
