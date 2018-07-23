@@ -11,7 +11,9 @@ import {
   Body,
   View,
   Right,
-  Badge
+  Badge,
+  Tabs,
+  Tab
 } from "native-base";
 import styles from "./styles/MainScreen";
 import {
@@ -55,7 +57,7 @@ class MainScreen extends Component {
     return (
       <Container>
         <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
-        <Header style={styles.header}>
+        <Header hasTabs style={styles.header}>
           <Left style={styles.left}>
             <View style={styles.menuContainer}>
               <Button
@@ -95,56 +97,112 @@ class MainScreen extends Component {
             </View>
           </Right>
         </Header>
-        <Content>
-          <View style={styles.swiperContainer}>
-            <Swiper autoplay>
-              <View>
-                <Image
-                  style={styles.promoImage}
-                  source={require("../../assets/images/tokopedia/promo1.jpg")}
-                />
+        <Tabs
+          tabBarUnderlineStyle={{
+            borderBottomWidth: 5,
+            borderBottomColor: "white"
+          }}
+          activeTextStyle={{ color: "white" }}
+        >
+          <Tab
+            heading="HOME"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.activeTabStyle}
+            activeTextStyle={styles.activeTextStyle}
+            textStyle={{ color: "#fff" }}
+          >
+            <Content>
+              <View style={styles.swiperContainer}>
+                <Swiper autoplay>
+                  <View>
+                    <Image
+                      style={styles.promoImage}
+                      source={require("../../assets/images/tokopedia/promo1.jpg")}
+                    />
+                  </View>
+                  <View>
+                    <Image
+                      style={styles.promoImage}
+                      source={require("../../assets/images/tokopedia/promo2.jpg")}
+                    />
+                  </View>
+                  <View>
+                    <Image
+                      style={styles.promoImage}
+                      source={require("../../assets/images/tokopedia/promo3.jpg")}
+                    />
+                  </View>
+                  <View>
+                    <Image
+                      style={styles.promoImage}
+                      source={require("../../assets/images/tokopedia/promo4.jpg")}
+                    />
+                  </View>
+                  <View>
+                    <Image
+                      style={styles.promoImage}
+                      source={require("../../assets/images/tokopedia/promo5.jpeg")}
+                    />
+                  </View>
+                </Swiper>
               </View>
-              <View>
-                <Image
-                  style={styles.promoImage}
-                  source={require("../../assets/images/tokopedia/promo2.jpg")}
-                />
+              <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
+              <View style={styles.loadingContainer}>
+                {this.props.loading ? (
+                  <Loading style={{ width: 45, height: 45 }} />
+                ) : null}
               </View>
-              <View>
-                <Image
-                  style={styles.promoImage}
-                  source={require("../../assets/images/tokopedia/promo3.jpg")}
-                />
-              </View>
-              <View>
-                <Image
-                  style={styles.promoImage}
-                  source={require("../../assets/images/tokopedia/promo4.jpg")}
-                />
-              </View>
-              <View>
-                <Image
-                  style={styles.promoImage}
-                  source={require("../../assets/images/tokopedia/promo5.jpeg")}
-                />
-              </View>
-            </Swiper>
-          </View>
-          <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
-          <View style={styles.loadingContainer}>
-            {this.props.loading ? (
-              <Loading style={{ width: 45, height: 45 }} />
-            ) : null}
-          </View>
-          <FlatList
-            data={this.props.content}
-            renderItem={({ item }) => (
-              <DashboardContent pressProduct={this.pressProduct} item={item} />
-            )}
-            numColumns={2}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </Content>
+              <FlatList
+                data={this.props.content}
+                renderItem={({ item }) => (
+                  <DashboardContent
+                    pressProduct={this.pressProduct}
+                    item={item}
+                  />
+                )}
+                numColumns={2}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </Content>
+          </Tab>
+          <Tab
+            heading="FEED"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.activeTabStyle}
+            activeTextStyle={styles.activeTextStyle}
+            textStyle={{ color: "#fff" }}
+          >
+            <View>
+              <Text>2</Text>
+            </View>
+          </Tab>
+          <Tab
+            heading="FAVORITES"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.activeTabStyle}
+            activeTextStyle={styles.activeTextStyle}
+            textStyle={{ color: "#fff" }}
+          >
+            <View>
+              <Text>3</Text>
+            </View>
+          </Tab>
+          <Tab
+            heading="HOT LIST"
+            tabStyle={styles.tabStyle}
+            textStyle={styles.textStyle}
+            activeTabStyle={styles.activeTabStyle}
+            activeTextStyle={styles.activeTextStyle}
+            textStyle={{ color: "#fff" }}
+          >
+            <View>
+              <Text>3</Text>
+            </View>
+          </Tab>
+        </Tabs>
       </Container>
     );
   }

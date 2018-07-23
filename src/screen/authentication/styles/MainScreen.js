@@ -74,7 +74,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#42b549",
     borderBottomWidth: 0
   },
-
+  tabStyle: {
+    backgroundColor: "#42b549"
+  },
+  textStyles: {
+    color: "#fff"
+  },
+  activeTabStyle: {
+    backgroundColor: "#42b549"
+  },
+  activeTextStyle: {
+    color: "#fff",
+    fontWeight: "normal"
+  },
   iconHead: {
     color: "#000"
   },
