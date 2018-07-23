@@ -6,6 +6,8 @@ import { persistor, store } from "./src/store/index";
 
 export default () => (
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
