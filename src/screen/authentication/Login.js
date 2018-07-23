@@ -9,13 +9,34 @@ import {
   Button,
   Header,
   Title,
-  Icon
+  Icon,
+  View
 } from "native-base";
 import t from "tcomb-form-native";
 import { connect } from "react-redux";
+import _ from "lodash";
+
 import Loading from "../../assets/components/Loading";
 import { loginAuth } from "../../actions/auth";
 import styles from "./styles/Login";
+
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
+
+stylesheet.textbox.normal.borderWidth = 0;
+stylesheet.textbox.error.borderWidth = 0;
+stylesheet.textbox.normal.marginBottom = 0;
+stylesheet.textbox.error.marginBottom = 0;
+
+stylesheet.textboxView.normal.borderWidth = 0;
+stylesheet.textboxView.error.borderWidth = 0;
+stylesheet.textboxView.normal.borderRadius = 0;
+stylesheet.textboxView.error.borderRadius = 0;
+stylesheet.textboxView.normal.borderBottomWidth = 2;
+stylesheet.textboxView.normal.borderBottomColor = "#42b549";
+stylesheet.textboxView.error.borderBottomColor = "#42b549";
+stylesheet.textboxView.error.borderBottomWidth = 2;
+stylesheet.textbox.normal.marginBottom = 5;
+stylesheet.textbox.error.marginBottom = 5;
 
 var Form = t.form.Form;
 
@@ -40,6 +61,7 @@ var data = t.struct({
 });
 
 var options = {
+  stylesheet: stylesheet,
   fields: {
     email: {
       label: "EMAIL",
@@ -78,19 +100,31 @@ class Login extends Component {
     this.props.loginAuth(this.state);
   };
 
+  componentWillMount() {
+    console.log("style:  ", stylesheet.textboxView.normal);
+  }
+
   render() {
     return (
       <Container>
-        <Header>
+        <Header
+          style={styles.header}
+          borderBottomWidth={2}
+          borderBottomColor="#d0d0d0"
+        >
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon type="Ionicons" name="ios-arrow-back" />
+              <Body>
+                <Title>Login</Title>
+              </Body>
             </Button>
           </Left>
-          <Body>
-            <Title>LOGIN</Title>
-          </Body>
-          <Right />
+          <Right>
+            <Button transparent>
+              <Text style={{ color: "#42b549" }}>Signup</Text>
+            </Button>
+          </Right>
         </Header>
         <Content style={styles.content}>
           <Form
@@ -100,7 +134,14 @@ class Login extends Component {
             ref="form"
             onChange={value => this.onChangeValue(value)}
           />
-          <Button style={styles.button} onPress={this._onPressButton} bordered>
+          <Left />
+          <Body />
+          <View style={styles.forgotPass}>
+            <Button transparent>
+              <Text style={{ color: "#42b549" }}>Forgot Password?</Text>
+            </Button>
+          </View>
+          <Button style={styles.button} onPress={this._onPressButton}>
             {this.props.isLoadingLogin ? (
               <Content>
                 <Left />

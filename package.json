@@ -8,12 +8,15 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.10",
     "lottie-react-native": "^2.5.0",
     "native-base": "^2.7.1",
     "persist-store": "^3.0.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-snap-carousel": "^3.7.2",
     "react-native-star-rating": "^1.0.9",
+    "react-native-step-indicator": "^0.0.9",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.7.0",
@@ -22,6 +25,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-persist": "^5.6.12",
     "redux-thunk": "^2.3.0",
+    "rn-viewpager": "^1.2.9",
     "tcomb-form-native": "^0.6.15"
   },
   "devDependencies": {

@@ -83,7 +83,7 @@ class MainScreen extends Component {
   };
 
   handleCart = () => {
-    this.props.navigation.navigate("Cart");
+    this.props.navigation.navigate("Order");
   };
 
   renderMenu = item => (
@@ -214,11 +214,15 @@ class MainScreen extends Component {
                   keyExtractor={(item, index) => index.toString()}
                 />
               </View>
-              <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
+
               <View style={styles.loadingContainer}>
                 {this.props.loading ? (
                   <Loading style={{ width: 45, height: 45 }} />
-                ) : null}
+                ) : (
+                  <Text style={{ color: "red", fontSize: 30 }}>
+                    Flash Sale!
+                  </Text>
+                )}
               </View>
               <FlatList
                 data={this.props.content}

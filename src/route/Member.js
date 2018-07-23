@@ -12,6 +12,7 @@ import Profile from "../screen/app/Profile";
 import ProductDesc from "../screen/app/ProductDesc";
 import Cart from "../screen/order/Cart";
 import Wishlist from "../screen/app/Wishlist";
+import Order from "../screen/order/Index";
 
 const navigation = createStackNavigator(
   {
@@ -20,7 +21,8 @@ const navigation = createStackNavigator(
     Profile: Profile,
     Cart: Cart,
     Wishlist: Wishlist,
-    ProductDesc: ProductDesc
+    ProductDesc: ProductDesc,
+    Order: Order
   },
   {
     headerMode: "none",

@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     marginLeft: 50
   },
   footerContainer: {
-    marginVertical: "2%"
+    marginVertical: "2%",
+    backgroundColor: "#42b549"
   },
   logoutButton: {
     borderTopWidth: 0,

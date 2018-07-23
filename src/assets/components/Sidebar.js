@@ -135,9 +135,6 @@ class Sidebar extends Component {
             <Button
               style={styles.footerContainer}
               onPress={() => this.props.logout()}
-              rounded
-              bordered
-              dark
             >
               <Text style={styles.logoutText}>Logout</Text>
             </Button>

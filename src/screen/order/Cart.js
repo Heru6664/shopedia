@@ -102,17 +102,6 @@ class Cart extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button onPress={() => this.props.navigation.goBack()} transparent>
-              <Icon type="Ionicons" name="ios-arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Cart</Title>
-          </Body>
-          <Right />
-        </Header>
         {this.props.cartLength === 0 ? (
           <EmptyCart navigation={this.props.navigation} />
         ) : (

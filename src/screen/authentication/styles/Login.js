@@ -7,14 +7,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     backgroundColor: "white"
   },
-
+  header: {
+    backgroundColor: "#fff"
+  },
+  forgotPass: {
+    width: "100%",
+    textAlign: "right"
+  },
   item: {
     marginVertical: "2%"
   },
   button: {
     width: "100%",
-    borderRadius: 100,
+    borderRadius: 5,
     borderColor: "#34495e",
+    backgroundColor: "#42b549",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -43,7 +50,7 @@ const styles = StyleSheet.create({
     marginVertical: "2%"
   },
   text: {
-    color: "#34495e",
+    color: "#fff",
     width: "100%",
     textAlign: "center"
   },
