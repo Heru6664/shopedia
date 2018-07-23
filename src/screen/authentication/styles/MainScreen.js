@@ -26,8 +26,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  iGrid: { fontSize: 23, color: "white" },
-  buttonHeadRight: { color: "white", fontSize: 30 },
+  iGrid: {
+    fontSize: 23,
+    color: "white"
+  },
+  buttonHeadRight: {
+    color: "white",
+    fontSize: 30
+  },
   menuContainer: {
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
@@ -49,6 +55,13 @@ const styles = StyleSheet.create({
     width: 20,
     height: 22,
     paddingLeft: 3
+  },
+  swiperContainer: {
+    height: 150
+  },
+  promoImage: {
+    width: "100%",
+    height: "100%"
   },
   loadingContainer: {
     alignItems: "center"

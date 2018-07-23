@@ -19,8 +19,11 @@ import {
   StatusBar,
   Platform,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
+import Swiper from "react-native-swiper";
+
 import DashboardContent from "../../assets/components/DashboardContent";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
@@ -92,8 +95,41 @@ class MainScreen extends Component {
             </View>
           </Right>
         </Header>
-
         <Content>
+          <View style={styles.swiperContainer}>
+            <Swiper autoplay>
+              <View>
+                <Image
+                  style={styles.promoImage}
+                  source={require("../../assets/images/tokopedia/promo1.jpg")}
+                />
+              </View>
+              <View>
+                <Image
+                  style={styles.promoImage}
+                  source={require("../../assets/images/tokopedia/promo2.jpg")}
+                />
+              </View>
+              <View>
+                <Image
+                  style={styles.promoImage}
+                  source={require("../../assets/images/tokopedia/promo3.jpg")}
+                />
+              </View>
+              <View>
+                <Image
+                  style={styles.promoImage}
+                  source={require("../../assets/images/tokopedia/promo4.jpg")}
+                />
+              </View>
+              <View>
+                <Image
+                  style={styles.promoImage}
+                  source={require("../../assets/images/tokopedia/promo5.jpeg")}
+                />
+              </View>
+            </Swiper>
+          </View>
           <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
           <View style={styles.loadingContainer}>
             {this.props.loading ? (

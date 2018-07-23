@@ -81,10 +81,10 @@ class Sidebar extends Component {
         <Content style={styles.contentContainer}>
           <View style={styles.header}>
             <Image
-              source={require("../images/logo.png")}
+              source={require("../images/tokopedia/tokopedia.png")}
               style={{
                 width: "100%",
-                height: 113,
+                height: 90,
                 alignSelf: "stretch",
                 justifyContent: "center",
                 alignItems: "center"
