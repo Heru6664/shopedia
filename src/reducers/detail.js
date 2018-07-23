@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         ...state,
         detailProduct: {
           ...state.detailProduct,
-          like: true
+          like: !state.detailProduct.like
         }
       };
     default:

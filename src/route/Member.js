@@ -11,6 +11,7 @@ import Login from "../screen/authentication/Login";
 import Profile from "../screen/app/Profile";
 import ProductDesc from "../screen/app/ProductDesc";
 import Cart from "../screen/order/Cart";
+import Wishlist from "../screen/app/Wishlist";
 
 const navigation = createStackNavigator(
   {
@@ -18,6 +19,7 @@ const navigation = createStackNavigator(
     Login: Login,
     Profile: Profile,
     Cart: Cart,
+    Wishlist: Wishlist,
     ProductDesc: ProductDesc
   },
   {

@@ -6,7 +6,10 @@ import {
   Left,
   Body,
   Right,
-  Button
+  Button,
+  Header,
+  Title,
+  Icon
 } from "native-base";
 import t from "tcomb-form-native";
 import { connect } from "react-redux";
@@ -78,6 +81,17 @@ class Login extends Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button onPress={() => this.props.navigation.goBack()} transparent>
+              <Icon type="Ionicons" name="ios-arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>LOGIN</Title>
+          </Body>
+          <Right />
+        </Header>
         <Content style={styles.content}>
           <Form
             type={data}

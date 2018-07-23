@@ -117,7 +117,7 @@ class Cart extends Component {
           <EmptyCart navigation={this.props.navigation} />
         ) : (
           <Container>
-            <Content>
+            <Content style={styles.container}>
               <FlatList
                 data={this.props.cart.cart}
                 renderItem={({ item }) => this.renderItem(item)}

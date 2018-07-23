@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#f1f0f1"
+  },
   iconContainer: {
     flex: 1,
     justifyContent: "center",

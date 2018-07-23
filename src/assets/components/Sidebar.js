@@ -61,7 +61,7 @@ const configGuest = [
   { name: "Login", route: "Login" }
 ];
 const routesConfig = [
-  { name: "Whislist", route: "Whislist" },
+  { name: "Wishlist", route: "Wishlist" },
   { name: "Cart", route: "Cart" },
   { name: "Setting", route: "Setting" }
 ];

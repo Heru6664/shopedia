@@ -30,7 +30,10 @@ export default (state = initialState, action) => {
       };
     case UPDATE_PRODUCT_LIKE:
       const modifiedProducts = state.product.map(p => {
-        if (p.id == action.payload) return Object.assign({}, p, { like: true });
+        if (p.id == action.payload)
+          return Object.assign({}, p, {
+            like: !state.product[action.payload].like
+          });
         return p;
       });
       return {
