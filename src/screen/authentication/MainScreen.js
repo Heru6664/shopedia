@@ -22,7 +22,8 @@ import {
   Platform,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import Swiper from "react-native-swiper";
 
@@ -31,12 +32,45 @@ import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
 import Loading from "../../assets/components/Loading";
 
+const { width } = Dimensions.get("window");
+
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[statusBar.statusBar, { backgroundColor }]}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     <View style={statusBar.appBar} />
   </View>
 );
+
+const menu = [
+  {
+    name: "Category",
+    iconName: "shopping-bag",
+    type: "Entypo",
+    route: "Category"
+  },
+  { name: "Bill", iconName: "ios-cash", type: "Ionicons", route: "Bill" },
+  { name: "Ticket", iconName: "ticket", type: "Entypo", route: "Ticket" },
+  {
+    name: "Finance",
+    iconName: "dollar",
+    type: "FontAwesome",
+    route: "Finance"
+  },
+  { name: "Sell", iconName: "shop", type: "Entypo", route: "Sell" },
+  {
+    name: "Official Store",
+    iconName: "store",
+    type: "MaterialIcons",
+    route: "OStore"
+  },
+  { name: "Camera", iconName: "camera", type: "EvilIcons", route: "Camera" },
+  {
+    name: "Mi-tix",
+    iconName: "ticket",
+    type: "MaterialCommunityIcons",
+    route: "Mytix"
+  }
+];
 
 class MainScreen extends Component {
   componentDidMount() {
@@ -49,9 +83,24 @@ class MainScreen extends Component {
   };
 
   handleCart = () => {
-    console.log("asd: ", this.props);
     this.props.navigation.navigate("Cart");
   };
+
+  renderMenu = item => (
+    <View style={{ backgroundColor: "#e7e7e7" }}>
+      <TouchableOpacity
+        style={{
+          justifyContent: "center",
+          marginHorizontal: 15,
+          alignItems: "center"
+        }}
+        onPress={() => handlePress(item.route)}
+      >
+        <Icon name={item.iconName} type={item.type} />
+        <Text>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   render() {
     return (
@@ -147,6 +196,24 @@ class MainScreen extends Component {
                   </View>
                 </Swiper>
               </View>
+
+              <View
+                style={{
+                  width,
+                  height: 150,
+                  backgroundColor: "#e7e7e7",
+                  paddingVertical: 15,
+
+                  paddingHorizontal: 15
+                }}
+              >
+                <FlatList
+                  data={menu}
+                  renderItem={({ item }) => this.renderMenu(item)}
+                  numColumns={4}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </View>
               <Text style={{ color: "red", fontSize: 30 }}>Flash Sale!</Text>
               <View style={styles.loadingContainer}>
                 {this.props.loading ? (
@@ -174,8 +241,15 @@ class MainScreen extends Component {
             activeTextStyle={styles.activeTextStyle}
             textStyle={{ color: "#fff" }}
           >
-            <View>
-              <Text>2</Text>
+            <View
+              style={{
+                flex: 1
+              }}
+            >
+              <Image
+                style={styles.feed}
+                source={require("../../assets/images/tokopedia/feed.png")}
+              />
             </View>
           </Tab>
           <Tab

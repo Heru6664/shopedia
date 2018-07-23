@@ -92,6 +92,12 @@ const styles = StyleSheet.create({
   },
   headMI: {
     backgroundColor: "#e67e22"
+  },
+  feed: {
+    width: 300,
+    height: 200,
+    alignItems: "center",
+    marginTop: -20
   }
 });
 
