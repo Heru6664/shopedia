@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   inbox: {
     borderBottomWidth: 0,
-    marginVertical: 10
+    marginVertical: 8
   },
   footerContainer: {
     marginVertical: "2%",

@@ -82,10 +82,12 @@ class Sidebar extends Component {
               </View>
             </View>
           ) : (
-            <Image
-              source={require("../images/tokopedia/tokopedia.png")}
-              style={styles.imageHeader}
-            />
+            <View style={styles.headerProfile}>
+              <Image
+                source={require("../images/tokopedia/tokopedia.png")}
+                style={styles.imageHeader}
+              />
+            </View>
           )}
         </View>
         <Content style={styles.contentContainer}>
@@ -94,7 +96,11 @@ class Sidebar extends Component {
               data={this.props.isLogin ? routesConfigTop : configGuest}
               renderItem={({ item }) => (
                 <View>
-                  <ListItem button onPress={() => handlePress(item.route)}>
+                  <ListItem
+                    style={styles.inbox}
+                    button
+                    onPress={() => handlePress(item.route)}
+                  >
                     <Left>
                       {this.props.isLogin ? (
                         <Icon
@@ -116,7 +122,11 @@ class Sidebar extends Component {
           {this.props.isLogin ? (
             <View>
               <View>
-                <ListItem button onPress={() => this.toggleExpanded()}>
+                <ListItem
+                  style={styles.inbox}
+                  button
+                  onPress={() => this.toggleExpanded()}
+                >
                   <Left>
                     <Icon
                       style={styles.content}
@@ -128,7 +138,11 @@ class Sidebar extends Component {
                     <Text style={styles.text}>Inbox</Text>
                   </Left>
                   <Right>
-                    <Icon name="ios-arrow-down" type="Ionicons" />
+                    {this.state.collapsedInbox ? (
+                      <Icon name="ios-arrow-down" type="Ionicons" />
+                    ) : (
+                      <Icon name="ios-arrow-up" type="Ionicons" />
+                    )}
                   </Right>
                 </ListItem>
               </View>
@@ -155,7 +169,11 @@ class Sidebar extends Component {
               </Collapsible>
 
               <View>
-                <ListItem button onPress={() => this.toggleExpandedOrder()}>
+                <ListItem
+                  style={styles.inbox}
+                  button
+                  onPress={() => this.toggleExpandedOrder()}
+                >
                   <Left>
                     <Icon
                       style={styles.content}
@@ -167,7 +185,11 @@ class Sidebar extends Component {
                     <Text style={styles.text}>Order</Text>
                   </Left>
                   <Right>
-                    <Icon name="ios-arrow-down" type="Ionicons" />
+                    {this.state.collapsedInbox ? (
+                      <Icon name="ios-arrow-down" type="Ionicons" />
+                    ) : (
+                      <Icon name="ios-arrow-up" type="Ionicons" />
+                    )}
                   </Right>
                 </ListItem>
               </View>
@@ -200,7 +222,11 @@ class Sidebar extends Component {
               data={this.props.isLogin ? routesConfigBottom : null}
               renderItem={({ item }) => (
                 <View>
-                  <ListItem button onPress={() => handlePress(item.route)}>
+                  <ListItem
+                    style={styles.inbox}
+                    button
+                    onPress={() => handlePress(item.route)}
+                  >
                     <Left>
                       {this.props.isLogin ? (
                         <Icon
@@ -236,13 +262,15 @@ class Sidebar extends Component {
             </View>
           ) : null}
         </Content>
-        <Footer>
-          <Left>
-            <ListItem button>
-              <Text style={styles.text}>Open Store</Text>
-            </ListItem>
-          </Left>
-        </Footer>
+        {this.props.isLogin ? (
+          <Footer>
+            <Left>
+              <ListItem button>
+                <Text style={styles.text}>Open Store</Text>
+              </ListItem>
+            </Left>
+          </Footer>
+        ) : null}
       </Container>
     );
   }

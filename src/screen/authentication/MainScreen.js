@@ -28,6 +28,7 @@ import {
 import Swiper from "react-native-swiper";
 
 import DashboardContent from "../../assets/components/DashboardContent";
+import { menu } from "../authentication/Constant/MainScreen";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
 import Loading from "../../assets/components/Loading";
@@ -40,37 +41,6 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
     <View style={statusBar.appBar} />
   </View>
 );
-
-const menu = [
-  {
-    name: "Category",
-    iconName: "shopping-bag",
-    type: "Entypo",
-    route: "Category"
-  },
-  { name: "Bill", iconName: "ios-cash", type: "Ionicons", route: "Bill" },
-  { name: "Ticket", iconName: "ticket", type: "Entypo", route: "Ticket" },
-  {
-    name: "Finance",
-    iconName: "dollar",
-    type: "FontAwesome",
-    route: "Finance"
-  },
-  { name: "Sell", iconName: "shop", type: "Entypo", route: "Sell" },
-  {
-    name: "Official Store",
-    iconName: "store",
-    type: "MaterialIcons",
-    route: "OStore"
-  },
-  { name: "Camera", iconName: "camera", type: "EvilIcons", route: "Camera" },
-  {
-    name: "Mi-tix",
-    iconName: "ticket",
-    type: "MaterialCommunityIcons",
-    route: "Mytix"
-  }
-];
 
 class MainScreen extends Component {
   componentDidMount() {
