@@ -20,6 +20,7 @@ import {
   StatusBar,
   TouchableOpacity
 } from "react-native";
+import Collapsible from "react-native-collapsible";
 import styles from "./styles/Sidebar";
 import { logout } from "../../actions/auth";
 import {
@@ -41,9 +42,16 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapsed: true
+      collapsedInbox: true,
+      collapsedOrder: true
     };
   }
+  toggleExpanded = () => {
+    this.setState({ collapsedInbox: !this.state.collapsedInbox });
+  };
+  toggleExpandedOrder = () => {
+    this.setState({ collapsedOrder: !this.state.collapsedOrder });
+  };
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -108,7 +116,7 @@ class Sidebar extends Component {
           {this.props.isLogin ? (
             <View>
               <View>
-                <ListItem button>
+                <ListItem button onPress={() => this.toggleExpanded()}>
                   <Left>
                     <Icon
                       style={styles.content}
@@ -124,28 +132,30 @@ class Sidebar extends Component {
                   </Right>
                 </ListItem>
               </View>
-              <View>
-                <FlatList
-                  data={inbox}
-                  renderItem={({ item }) => (
-                    <View>
-                      <ListItem
-                        style={styles.inbox}
-                        button
-                        onPress={() => handlePress(item.route)}
-                      >
-                        <Left style={styles.cText}>
-                          <Text style={styles.text}>{item.name}</Text>
-                        </Left>
-                      </ListItem>
-                    </View>
-                  )}
-                  keyExtractor={(item, index) => index.toString()}
-                />
-              </View>
+              <Collapsible collapsed={this.state.collapsedInbox}>
+                <View>
+                  <FlatList
+                    data={inbox}
+                    renderItem={({ item }) => (
+                      <View>
+                        <ListItem
+                          style={styles.inbox}
+                          button
+                          onPress={() => handlePress(item.route)}
+                        >
+                          <Left style={styles.cText}>
+                            <Text style={styles.text}>{item.name}</Text>
+                          </Left>
+                        </ListItem>
+                      </View>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                </View>
+              </Collapsible>
 
               <View>
-                <ListItem button>
+                <ListItem button onPress={() => this.toggleExpandedOrder()}>
                   <Left>
                     <Icon
                       style={styles.content}
@@ -161,25 +171,27 @@ class Sidebar extends Component {
                   </Right>
                 </ListItem>
               </View>
-              <View>
-                <FlatList
-                  data={order}
-                  renderItem={({ item }) => (
-                    <View>
-                      <ListItem
-                        style={styles.inbox}
-                        button
-                        onPress={() => handlePress(item.route)}
-                      >
-                        <Left style={styles.cText}>
-                          <Text style={styles.text}>{item.name}</Text>
-                        </Left>
-                      </ListItem>
-                    </View>
-                  )}
-                  keyExtractor={(item, index) => index.toString()}
-                />
-              </View>
+              <Collapsible collapsed={this.state.collapsedOrder}>
+                <View>
+                  <FlatList
+                    data={order}
+                    renderItem={({ item }) => (
+                      <View>
+                        <ListItem
+                          style={styles.inbox}
+                          button
+                          onPress={() => handlePress(item.route)}
+                        >
+                          <Left style={styles.cText}>
+                            <Text style={styles.text}>{item.name}</Text>
+                          </Left>
+                        </ListItem>
+                      </View>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                  />
+                </View>
+              </Collapsible>
             </View>
           ) : null}
 
