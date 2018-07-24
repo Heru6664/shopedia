@@ -83,7 +83,7 @@ class MainScreen extends Component {
   };
 
   handleCart = () => {
-    this.props.navigation.navigate("Order");
+    this.props.navigation.navigate("Cart");
   };
 
   renderMenu = item => (
@@ -126,7 +126,11 @@ class MainScreen extends Component {
           <Right>
             <View style={styles.buttonRightContainer}>
               <TouchableOpacity style={styles.gridICont}>
-                <Icon style={styles.iGrid} name="grid" type="SimpleLineIcons" />
+                <Icon
+                  style={styles.iGrid}
+                  name="qrcode-scan"
+                  type="MaterialCommunityIcons"
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.handleCart()}
