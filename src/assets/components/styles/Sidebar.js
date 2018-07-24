@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginRight: 20
   },
+  userName: {},
   header: {
     marginTop: 8,
     borderBottomColor: "rgba(0,0,0, 0.5)",
@@ -43,6 +44,10 @@ const styles = StyleSheet.create({
   cText: {
     position: "absolute",
     marginLeft: 50
+  },
+  inbox: {
+    borderBottomWidth: 0,
+    marginVertical: 10
   },
   footerContainer: {
     marginVertical: "2%",

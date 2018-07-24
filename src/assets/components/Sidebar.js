@@ -6,17 +6,15 @@ import {
   View,
   Text,
   ListItem,
-  H3,
   Icon,
   Left,
   Footer,
   Button,
-  Body
+  Right
 } from "native-base";
 import {
   Image,
   FlatList,
-  Dimensions,
   Platform,
   StyleSheet,
   StatusBar,
@@ -24,8 +22,13 @@ import {
 } from "react-native";
 import styles from "./styles/Sidebar";
 import { logout } from "../../actions/auth";
-
-const { width } = Dimensions.get("window");
+import {
+  configGuest,
+  routesConfigTop,
+  routesConfigBottom,
+  inbox,
+  order
+} from "../components/Constant/Sidebar";
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[statusBar.statusBar, { backgroundColor }]}>
@@ -34,55 +37,11 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
   </View>
 );
 
-const configGuest = [
-  { iconName: null, iconType: null, name: "Home", route: "MainScreen" },
-  { iconName: null, iconType: null, name: "Category", route: "Category" },
-  { iconName: null, iconType: null, name: "Login", route: "Login" },
-  { iconName: null, iconType: null, name: "Signup", route: "Signup" }
-];
-const routesConfigTop = [
-  { iconName: "home", iconType: "Entypo", name: "Home", route: "MainScreen" },
-  {
-    iconName: "grid",
-    iconType: "SimpleLineIcons",
-    name: "Category",
-    route: "Category"
-  },
-  {
-    iconName: "star",
-    iconType: "EvilIcons",
-    name: "Wishlist",
-    route: "Wishlist"
-  }
-];
-
-const routesConfigBottom = [
-  {
-    iconName: "feedback",
-    iconType: "MaterialIcons",
-    name: "My Feedback",
-    route: "Feedback"
-  },
-  {
-    iconName: "ios-settings",
-    iconType: "Ionicons",
-    name: "Settings",
-    route: "Settings"
-  },
-  {
-    iconName: "ios-contact",
-    iconType: "Ionicons",
-    name: "Contact Us",
-    route: "Contact"
-  },
-  { iconName: "help-circle", iconType: "Feather", name: "Help", route: "Help" }
-];
-
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: true
+      collapsed: true
     };
   }
   Capitalize(str) {
@@ -146,6 +105,84 @@ class Sidebar extends Component {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
+          {this.props.isLogin ? (
+            <View>
+              <View>
+                <ListItem button>
+                  <Left>
+                    <Icon
+                      style={styles.content}
+                      name="ios-mail-open"
+                      type="Ionicons"
+                    />
+                  </Left>
+                  <Left style={styles.cText}>
+                    <Text style={styles.text}>Inbox</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="ios-arrow-down" type="Ionicons" />
+                  </Right>
+                </ListItem>
+              </View>
+              <View>
+                <FlatList
+                  data={inbox}
+                  renderItem={({ item }) => (
+                    <View>
+                      <ListItem
+                        style={styles.inbox}
+                        button
+                        onPress={() => handlePress(item.route)}
+                      >
+                        <Left style={styles.cText}>
+                          <Text style={styles.text}>{item.name}</Text>
+                        </Left>
+                      </ListItem>
+                    </View>
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </View>
+
+              <View>
+                <ListItem button>
+                  <Left>
+                    <Icon
+                      style={styles.content}
+                      name="ios-basket"
+                      type="Ionicons"
+                    />
+                  </Left>
+                  <Left style={styles.cText}>
+                    <Text style={styles.text}>Order</Text>
+                  </Left>
+                  <Right>
+                    <Icon name="ios-arrow-down" type="Ionicons" />
+                  </Right>
+                </ListItem>
+              </View>
+              <View>
+                <FlatList
+                  data={order}
+                  renderItem={({ item }) => (
+                    <View>
+                      <ListItem
+                        style={styles.inbox}
+                        button
+                        onPress={() => handlePress(item.route)}
+                      >
+                        <Left style={styles.cText}>
+                          <Text style={styles.text}>{item.name}</Text>
+                        </Left>
+                      </ListItem>
+                    </View>
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </View>
+            </View>
+          ) : null}
+
           <View>
             <FlatList
               data={this.props.isLogin ? routesConfigBottom : null}
@@ -170,17 +207,30 @@ class Sidebar extends Component {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
+          {this.props.isLogin ? (
+            <View>
+              <ListItem button onPress={() => this.props.logout()}>
+                <Left>
+                  <Icon
+                    style={styles.content}
+                    name="logout"
+                    type="SimpleLineIcons"
+                  />
+                </Left>
+                <Left style={styles.cText}>
+                  <Text style={styles.text}>Logout</Text>
+                </Left>
+              </ListItem>
+            </View>
+          ) : null}
         </Content>
-        {this.props.isLogin ? (
-          <Footer style={styles.logoutButton}>
-            <Button
-              style={styles.footerContainer}
-              onPress={() => this.props.logout()}
-            >
-              <Text style={styles.logoutText}>Logout</Text>
-            </Button>
-          </Footer>
-        ) : null}
+        <Footer>
+          <Left>
+            <ListItem button>
+              <Text style={styles.text}>Open Store</Text>
+            </ListItem>
+          </Left>
+        </Footer>
       </Container>
     );
   }
