@@ -100,10 +100,6 @@ class Login extends Component {
     this.props.loginAuth(this.state);
   };
 
-  componentWillMount() {
-    console.log("style:  ", stylesheet.textboxView.normal);
-  }
-
   render() {
     return (
       <Container>

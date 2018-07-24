@@ -19,14 +19,35 @@ import {
   FooterTab,
   View
 } from "native-base";
-import { FlatList, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  TouchableOpacity,
+  Platform,
+  StyleSheet,
+  StatusBar,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
 import { remvFromCart, incTotal, decTotal } from "../../actions/cart";
 import styles from "./style/Cart";
+import {
+  addItemPrice,
+  addShoppingItem,
+  addSellerNote
+} from "../../actions/order";
+
+const MyStatusBar = ({ backgroundColor, ...props }) => (
+  <View style={[statusBar.statusBar, { backgroundColor }]}>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    <View style={statusBar.appBar} />
+  </View>
+);
 
 class EmptyCart extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <View style={styles.iconContainer}>
@@ -47,13 +68,26 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: 1
+      message: ""
     };
   }
 
   handleDelete = id => {
     this.props.delete(id);
   };
+
+  componentWillMount() {
+    let amount = this.calculateTotalVal();
+    this.props.addItemPrice(amount);
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.props !== this.props) {
+      let amount = this.calculateTotalVal();
+      this.props.addItemPrice(amount);
+    }
+  }
+
   calculateTotalVal = () => {
     let val = 0;
     this.props.cart.cart.forEach(data => {
@@ -63,8 +97,34 @@ class Cart extends Component {
     });
     return val;
   };
+
+  handleCheckout = () => {
+    this.props.addSellerNote(this.state.message);
+    this.props.addShoppingItem(this.props.cart.cart);
+    this.props.navigation.navigate("Review");
+  };
+
+  onChangeVal = value => {
+    this.setState({
+      message: value
+    });
+  };
+
   renderItem = item => (
     <Card>
+      <CardItem>
+        <TouchableOpacity>
+          <Text>Seller: {item.seller.sellerName}</Text>
+        </TouchableOpacity>
+        <CardItem>
+          <Right>
+            <Button onPress={() => this.handleDelete(item.id)} transparent>
+              <Text>Delete</Text>
+              <Icon type="EvilIcons" name="trash" />
+            </Button>
+          </Right>
+        </CardItem>
+      </CardItem>
       <TouchableOpacity style={styles.contentProd}>
         <CardItem>
           <CardItem>
@@ -72,36 +132,51 @@ class Cart extends Component {
               <Thumbnail source={{ uri: item.img }} />
               <Body>
                 <Text>{item.name}</Text>
-                <Text note>{item.category}</Text>
+                <Text note>$ {item.price}</Text>
               </Body>
             </Left>
-            <Right>
-              <H2>$ {item.price}</H2>
-            </Right>
           </CardItem>
+        </CardItem>
+        <CardItem>
+          <View style={styles.vInc} />
+          <View style={styles.vInc}>
+            <Left>
+              <Button onPress={() => this.props.decTotal(item)} transparent>
+                <Icon name="minus" type="EvilIcons" />
+              </Button>
+            </Left>
+            <Body>
+              <Text>{item.total}</Text>
+            </Body>
+            <Right>
+              <Button onPress={() => this.props.incTotal(item)} transparent>
+                <Icon name="plus" type="EvilIcons" />
+              </Button>
+            </Right>
+          </View>
         </CardItem>
       </TouchableOpacity>
       <CardItem>
-        <Button onPress={() => this.props.decTotal(item)} transparent>
-          <Icon name="minus" type="Entypo" />
-        </Button>
-        <Text>{item.total}</Text>
-        <Button onPress={() => this.props.incTotal(item)} transparent>
-          <Icon name="add" />
-        </Button>
-        <Right>
-          <Button onPress={() => this.handleDelete(item.id)} transparent>
-            <Text>Delete</Text>
-            <Icon type="EvilIcons" name="trash" />
-          </Button>
-        </Right>
+        <Text note>Message for seller (optional)</Text>
+      </CardItem>
+      <CardItem>
+        <TextInput
+          value={this.state.message}
+          style={{
+            width: "100%",
+            borderBottomWidth: 1,
+            borderBottomColor: "#058c06",
+            fontSize: 16
+          }}
+          onChangeText={val => this.onChangeVal(val)}
+        />
       </CardItem>
     </Card>
   );
-
   render() {
     return (
       <Container>
+        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
@@ -114,36 +189,31 @@ class Cart extends Component {
           <EmptyCart navigation={this.props.navigation} />
         ) : (
           <Container>
-            <Content style={styles.container}>
-              <FlatList
-                data={this.props.cart.cart}
-                renderItem={({ item }) => this.renderItem(item)}
-                keyExtractor={(item, index) => index.toString()}
-              />
-            </Content>
+            <KeyboardAvoidingView style={{ flex: 1 }}>
+              <Content>
+                <FlatList
+                  data={this.props.cart.cart}
+                  renderItem={({ item }) => this.renderItem(item)}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              </Content>
+            </KeyboardAvoidingView>
             <Footer style={styles.footer}>
               <FooterTab style={styles.footerTabContainer}>
                 <View style={styles.vw}>
                   <CardItem>
-                    <Text>Total Amount:</Text>
-                    <Body />
-                    <Right>
-                      <Text style={styles.amount}>
-                        $ {this.calculateTotalVal()}
-                      </Text>
-                    </Right>
+                    <Text note>Total Amount:</Text>
                   </CardItem>
                   <CardItem>
-                    <Text>Total Discount:</Text>
-                    <Body />
-                    <Right>
-                      <Text style={styles.amount}>0</Text>
-                    </Right>
+                    <Text>$ {this.props.amount}</Text>
                   </CardItem>
                 </View>
                 <Right>
-                  <Button danger bordered>
-                    <Text>Next</Text>
+                  <Button
+                    onPress={() => this.handleCheckout()}
+                    style={styles.checkoutBtn}
+                  >
+                    <Text>Checkout</Text>
                   </Button>
                 </Right>
               </FooterTab>
@@ -155,15 +225,32 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = ({ cart }) => ({
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
+
+const statusBar = StyleSheet.create({
+  statusBar: {
+    height: STATUSBAR_HEIGHT
+  },
+  appBar: {
+    backgroundColor: "#058c06",
+    height: APPBAR_HEIGHT
+  }
+});
+
+const mapStateToProps = ({ cart, order }) => ({
   cart,
+  amount: order.amount,
   cartLength: cart.cart.length
 });
 
 const mapDispatchToProps = dispatch => ({
   delete: item => dispatch(remvFromCart(item)),
   incTotal: totalUp => dispatch(incTotal(totalUp)),
-  decTotal: totalDwn => dispatch(decTotal(totalDwn))
+  decTotal: totalDwn => dispatch(decTotal(totalDwn)),
+  addItemPrice: price => dispatch(addItemPrice(price)),
+  addSellerNote: note => dispatch(addSellerNote(note)),
+  addShoppingItem: item => dispatch(addShoppingItem(item))
 });
 
 export default connect(

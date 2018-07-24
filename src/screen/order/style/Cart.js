@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f1f0f1"
+    backgroundColor: "#f1f0f1",
+    paddingBottom: 15
   },
   iconContainer: {
     flex: 1,
@@ -17,8 +18,15 @@ const styles = StyleSheet.create({
   },
   contentProd: {
     marginHorizontal: 10,
+    borderTopWidth: 0.5,
+    borderTopColor: "grey",
     borderBottomColor: "grey",
     borderBottomWidth: 0.5
+  },
+  vInc: {
+    flexDirection: "row",
+    width: "50%",
+    marginRight: 0
   },
   button: {
     marginTop: "5%",
@@ -34,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   footer: {
-    height: 100,
+    height: 80,
     backgroundColor: "white"
   },
   vw: {
@@ -42,6 +50,13 @@ const styles = StyleSheet.create({
   },
   amount: {
     textAlign: "right"
+  },
+  checkoutBtn: {
+    backgroundColor: "#f85420",
+    width: 150,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

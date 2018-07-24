@@ -62,23 +62,53 @@ class Sidebar extends Component {
         <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <View style={styles.header}>
           {this.props.isLogin ? (
-            <View style={styles.headerProfile}>
-              <View style={styles.profilePhoto}>
-                <TouchableOpacity>
+            <View>
+              <View style={styles.headerProfile}>
+                <View style={styles.profilePhoto}>
+                  <TouchableOpacity>
+                    <Left>
+                      <Image
+                        source={require("../images/tokopedia/defaultProfile.png")}
+                        style={styles.imageProfileC}
+                      />
+                    </Left>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <Text style={styles.userName}>
+                    {this.Capitalize(this.props.user.first_name) +
+                      " " +
+                      this.Capitalize(this.props.user.last_name)}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.headMenuC}>
+                <ListItem style={styles.headMenu} button>
                   <Left>
-                    <Image
-                      source={require("../images/tokopedia/defaultProfile.png")}
-                      style={styles.imageProfileC}
+                    <Icon
+                      style={styles.content}
+                      name="cash-100"
+                      type="MaterialCommunityIcons"
                     />
                   </Left>
-                </TouchableOpacity>
+                  <Left style={styles.cText}>
+                    <Text style={styles.text}>Balance</Text>
+                  </Left>
+                </ListItem>
               </View>
-              <View>
-                <Text style={styles.userName}>
-                  {this.Capitalize(this.props.user.first_name) +
-                    " " +
-                    this.Capitalize(this.props.user.last_name)}
-                </Text>
+              <View style={styles.headMenuC}>
+                <ListItem style={styles.headMenu} button>
+                  <Left>
+                    <Icon
+                      style={styles.content}
+                      name="account-balance-wallet"
+                      type="MaterialIcons"
+                    />
+                  </Left>
+                  <Left style={styles.cText}>
+                    <Text style={styles.text}>TokoCash</Text>
+                  </Left>
+                </ListItem>
               </View>
             </View>
           ) : (
@@ -185,7 +215,7 @@ class Sidebar extends Component {
                     <Text style={styles.text}>Order</Text>
                   </Left>
                   <Right>
-                    {this.state.collapsedInbox ? (
+                    {this.state.collapsedOrder ? (
                       <Icon name="ios-arrow-down" type="Ionicons" />
                     ) : (
                       <Icon name="ios-arrow-up" type="Ionicons" />

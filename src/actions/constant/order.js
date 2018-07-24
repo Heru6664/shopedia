@@ -1,0 +1,3 @@
+export const ADD_SHOPPING_ITEM = "ADD_SHOPPING_ITEM";
+export const ADD_ITEM_PRICE = "ADD_ITEM_PRICE";
+export const ADD_SELLER_NOTE = "ADD_SELLER_NOTE";

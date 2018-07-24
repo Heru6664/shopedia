@@ -47,7 +47,16 @@ const styles = StyleSheet.create({
   },
   inbox: {
     borderBottomWidth: 0,
-    marginVertical: 8
+    marginVertical: 5
+  },
+  headMenuC: {
+    flexDirection: "column",
+    backgroundColor: "#eff4ee"
+  },
+  headMenu: {
+    borderBottomWidth: 0,
+    marginVertical: 8,
+    backgroundColor: "#eff4ee"
   },
   footerContainer: {
     marginVertical: "2%",
