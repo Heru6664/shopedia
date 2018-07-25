@@ -17,6 +17,7 @@ import {
 import { FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import styles from "./styles/Whislist";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 class Wishlist extends Component {
   componentWillMount() {
@@ -45,6 +46,7 @@ class Wishlist extends Component {
   render() {
     return (
       <Container>
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>

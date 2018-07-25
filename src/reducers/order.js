@@ -1,13 +1,15 @@
 import {
   ADD_SHOPPING_ITEM,
   ADD_ITEM_PRICE,
-  ADD_SELLER_NOTE
+  ADD_SELLER_NOTE,
+  ADD_PAYMENT_METHOD
 } from "../actions/constant/order";
 
 const initialState = {
   item: [],
   amount: 0,
-  note: ""
+  note: "",
+  paymentMethod: ""
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +28,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         note: action.payload
+      };
+    case ADD_PAYMENT_METHOD:
+      console.log(action.payload);
+      return {
+        ...state,
+        paymentMethod: action.payload.name
       };
     default:
       return state;

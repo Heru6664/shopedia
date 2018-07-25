@@ -25,6 +25,7 @@ import { Image, TouchableOpacity } from "react-native";
 import styles from "./styles/ProductDesc";
 import { addWishlist } from "../../actions/wishlist";
 import { addItemCart } from "../../actions/cart";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 class ProductDesc extends Component {
   state = {
@@ -34,6 +35,7 @@ class ProductDesc extends Component {
   render() {
     return (
       <Container style={styles.container}>
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>

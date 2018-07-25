@@ -1,39 +1,37 @@
-import React, { Component } from "react";
 import {
-  Container,
   Body,
-  Content,
-  Card,
-  Header,
-  CardItem,
-  Text,
-  Left,
   Button,
-  Icon,
-  Title,
-  Right,
-  H1,
+  Card,
+  CardItem,
+  Container,
+  Content,
   H3,
-  View,
-  ListItem
+  Header,
+  Icon,
+  Left,
+  ListItem,
+  Right,
+  Text,
+  Title,
+  View
 } from "native-base";
+import React, { Component } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { FlatList, Image, Platform, StyleSheet, StatusBar } from "react-native";
-import styles from "./style/Review";
+import { addPaymentMethod } from "../../actions/order";
 import { bank, store } from "./Constant/Review";
-
-const MyStatusBar = ({ backgroundColor, ...props }) => (
-  <View style={[statusBar.statusBar, { backgroundColor }]}>
-    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    <View style={statusBar.appBar} />
-  </View>
-);
+import styles from "./style/Review";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 class Review extends Component {
+  choosedMethod = item => {
+    this.props.addPaymentMethod(item);
+    this.props.navigation.navigate("Checkout");
+  };
   render() {
     return (
       <Container style={styles.container}>
-        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
@@ -64,21 +62,23 @@ class Review extends Component {
             <CardItem>
               <Text>Select payment method</Text>
             </CardItem>
-            <CardItem>
-              <Text>TokoCash</Text>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Icon name="account-balance-wallet" type="MaterialIcons" />
+            <TouchableOpacity>
+              <CardItem>
+                <Text>TokoCash</Text>
+              </CardItem>
+              <CardItem>
                 <Left>
-                  <Text>TokoCash</Text>
-                  <Text note>$ 0</Text>
+                  <Icon name="account-balance-wallet" type="MaterialIcons" />
+                  <Left>
+                    <Text>TokoCash</Text>
+                    <Text note>$ 0</Text>
+                  </Left>
                 </Left>
-              </Left>
-              <Right>
-                <Icon name="chevron-right" type="Entypo" />
-              </Right>
-            </CardItem>
+                <Right>
+                  <Icon name="chevron-right" type="Entypo" />
+                </Right>
+              </CardItem>
+            </TouchableOpacity>
           </Card>
 
           <Card>
@@ -91,7 +91,11 @@ class Review extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                   <View>
-                    <ListItem style={styles.text}>
+                    <ListItem
+                      button
+                      onPress={() => this.choosedMethod(item)}
+                      style={styles.text}
+                    >
                       <Left>
                         <Text>{item.name}</Text>
                       </Left>
@@ -130,7 +134,11 @@ class Review extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                   <View>
-                    <ListItem style={styles.text}>
+                    <ListItem
+                      button
+                      onPress={() => this.choosedMethod(item)}
+                      style={styles.text}
+                    >
                       <Left>
                         <Text>{item.name}</Text>
                       </Left>
@@ -149,21 +157,15 @@ class Review extends Component {
   }
 }
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
-const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
-
-const statusBar = StyleSheet.create({
-  statusBar: {
-    height: STATUSBAR_HEIGHT
-  },
-  appBar: {
-    backgroundColor: "#058c06",
-    height: APPBAR_HEIGHT
-  }
-});
-
 const mapStateToProps = ({ order }) => ({
   order
 });
 
-export default connect(mapStateToProps)(Review);
+const mapDispatchToProps = dispatch => ({
+  addPaymentMethod: data => dispatch(addPaymentMethod(data))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Review);

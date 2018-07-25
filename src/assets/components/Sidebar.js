@@ -12,14 +12,7 @@ import {
   Button,
   Right
 } from "native-base";
-import {
-  Image,
-  FlatList,
-  Platform,
-  StyleSheet,
-  StatusBar,
-  TouchableOpacity
-} from "react-native";
+import { Image, FlatList, TouchableOpacity } from "react-native";
 import Collapsible from "react-native-collapsible";
 import styles from "./styles/Sidebar";
 import { logout } from "../../actions/auth";
@@ -30,13 +23,7 @@ import {
   inbox,
   order
 } from "../components/Constant/Sidebar";
-
-const MyStatusBar = ({ backgroundColor, ...props }) => (
-  <View style={[statusBar.statusBar, { backgroundColor }]}>
-    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    <View style={statusBar.appBar} />
-  </View>
-);
+import { DefaultStatusBar } from "../components/StatusBar";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -59,7 +46,7 @@ class Sidebar extends Component {
     const { handlePress } = this.props;
     return (
       <Container>
-        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <View style={styles.header}>
           {this.props.isLogin ? (
             <View>
@@ -306,18 +293,6 @@ class Sidebar extends Component {
   }
 }
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
-const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
-
-const statusBar = StyleSheet.create({
-  statusBar: {
-    height: STATUSBAR_HEIGHT
-  },
-  appBar: {
-    backgroundColor: "#058c06",
-    height: APPBAR_HEIGHT
-  }
-});
 mapStateToProps = ({ auth }) => ({
   isLogin: auth.isLogin,
   user: auth.user.user

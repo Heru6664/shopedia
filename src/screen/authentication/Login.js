@@ -19,6 +19,7 @@ import _ from "lodash";
 import Loading from "../../assets/components/Loading";
 import { loginAuth } from "../../actions/auth";
 import styles from "./styles/Login";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
 
@@ -103,6 +104,7 @@ class Login extends Component {
   render() {
     return (
       <Container>
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header
           style={styles.header}
           borderBottomWidth={2}

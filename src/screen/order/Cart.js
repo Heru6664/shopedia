@@ -36,7 +36,7 @@ import {
   addSellerNote
 } from "../../actions/order";
 
-const MyStatusBar = ({ backgroundColor, ...props }) => (
+const DefaultStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[statusBar.statusBar, { backgroundColor }]}>
     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     <View style={statusBar.appBar} />
@@ -176,7 +176,7 @@ class Cart extends Component {
   render() {
     return (
       <Container>
-        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>

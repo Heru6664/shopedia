@@ -1,22 +1,22 @@
 export const bank = [
   {
     name: "Bank BCA",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "Bank Mandiri",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "Bank BNI",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "Bank BRI",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   }
 ];
@@ -24,22 +24,22 @@ export const bank = [
 export const store = [
   {
     name: "Indomaret/Ceriamart",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "Alfamart / Alfamidi / Lawson",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "Post Office",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   },
   {
     name: "JNE",
-    image: "bca.png",
+    image: "../../../assets/images/bca.png",
     route: "checkout"
   }
 ];

@@ -16,15 +16,7 @@ import {
   Tab
 } from "native-base";
 import styles from "./styles/MainScreen";
-import {
-  FlatList,
-  StatusBar,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Dimensions
-} from "react-native";
+import { FlatList, TouchableOpacity, Image, Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
 
 import DashboardContent from "../../assets/components/DashboardContent";
@@ -32,15 +24,9 @@ import { menu } from "../authentication/Constant/MainScreen";
 import { fetchProduct } from "../../actions/product";
 import { getDetail } from "../../actions/detail";
 import Loading from "../../assets/components/Loading";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 const { width } = Dimensions.get("window");
-
-const MyStatusBar = ({ backgroundColor, ...props }) => (
-  <View style={[statusBar.statusBar, { backgroundColor }]}>
-    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    <View style={statusBar.appBar} />
-  </View>
-);
 
 class MainScreen extends Component {
   componentDidMount() {
@@ -75,7 +61,7 @@ class MainScreen extends Component {
   render() {
     return (
       <Container>
-        <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header hasTabs style={styles.header}>
           <Left style={styles.left}>
             <View style={styles.menuContainer}>
@@ -260,18 +246,6 @@ class MainScreen extends Component {
   }
 }
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
-const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
-
-const statusBar = StyleSheet.create({
-  statusBar: {
-    height: STATUSBAR_HEIGHT
-  },
-  appBar: {
-    backgroundColor: "#0a8f09",
-    height: APPBAR_HEIGHT
-  }
-});
 const mapStateToProps = ({ auth, product, cart }) => {
   return {
     cartLength: cart.cart.length,

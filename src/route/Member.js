@@ -13,6 +13,7 @@ import ProductDesc from "../screen/app/ProductDesc";
 import Cart from "../screen/order/Cart";
 import Wishlist from "../screen/app/Wishlist";
 import Review from "../screen/order/Review";
+import Checkout from "../screen/order/Checkout";
 
 const navigation = createStackNavigator(
   {
@@ -22,11 +23,12 @@ const navigation = createStackNavigator(
     Cart: Cart,
     Wishlist: Wishlist,
     ProductDesc: ProductDesc,
-    Review: Review
+    Review: Review,
+    Checkout: Checkout
   },
   {
     headerMode: "none",
-    initialRouteName: "Review"
+    initialRouteName: "Checkout"
   }
 );
 
