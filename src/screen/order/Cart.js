@@ -99,9 +99,13 @@ class Cart extends Component {
   };
 
   handleCheckout = () => {
-    this.props.addSellerNote(this.state.message);
-    this.props.addShoppingItem(this.props.cart.cart);
-    this.props.navigation.navigate("Review");
+    if (this.props.isLogin) {
+      this.props.addSellerNote(this.state.message);
+      this.props.addShoppingItem(this.props.cart.cart);
+      this.props.navigation.navigate("Review");
+    } else {
+      this.props.navigation.navigate("Login");
+    }
   };
 
   onChangeVal = value => {
@@ -238,8 +242,9 @@ const statusBar = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ cart, order }) => ({
+const mapStateToProps = ({ cart, order, auth }) => ({
   cart,
+  isLogin: auth.isLogin,
   amount: order.amount,
   cartLength: cart.cart.length
 });

@@ -8,7 +8,7 @@ import {
 import Sidebar from "../assets/components/Sidebar";
 import MainScreen from "../screen/authentication/MainScreen";
 import Login from "../screen/authentication/Login";
-import Profile from "../screen/app/Profile";
+import Profile from "../screen/user/Profile";
 import ProductDesc from "../screen/app/ProductDesc";
 import Cart from "../screen/order/Cart";
 import Wishlist from "../screen/app/Wishlist";
@@ -28,7 +28,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Checkout"
+    initialRouteName: "Review"
   }
 );
 
