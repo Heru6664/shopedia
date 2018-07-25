@@ -26,7 +26,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Cart"
+    initialRouteName: "Review"
   }
 );
 
