@@ -64,7 +64,10 @@ class Checkout extends Component {
           </Card>
         </Content>
         <Footer style={styles.footer}>
-          <Button style={styles.payButton}>
+          <Button
+            onPress={() => this.props.navigation.navigate("Details")}
+            style={styles.payButton}
+          >
             <Text>Pay</Text>
           </Button>
         </Footer>

@@ -52,7 +52,7 @@ class Review extends Component {
                     <H3>$ {this.props.order.amount}</H3>
                   </Left>
                   <Right>
-                    <Button transparent>
+                    <Button onPress={() => this.props.navigation.navigate("Cart")} transparent>
                       <Text>Show Details</Text>
                     </Button>
                   </Right>

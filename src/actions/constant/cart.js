@@ -3,3 +3,5 @@ export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 
 export const INC_TOTAL = "INC_TOTAL";
 export const DEC_TOTAL = "DEC_TOTAL";
+
+export const CALC_SUBTOTAL = "CALC_SUBTOTAL";

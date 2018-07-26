@@ -30,7 +30,6 @@ export default (state = initialState, action) => {
         note: action.payload
       };
     case ADD_PAYMENT_METHOD:
-      console.log(action.payload);
       return {
         ...state,
         paymentMethod: action.payload.name

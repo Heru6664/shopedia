@@ -3,7 +3,8 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   INC_TOTAL,
-  DEC_TOTAL
+  DEC_TOTAL,
+  CALC_SUBTOTAL
 } from "./constant/cart";
 
 export const addItemCart = item => ({
@@ -33,6 +34,7 @@ export const incTotal = inc => dispatch => {
   const index = id.findIndex(i => inc.id === i.id);
 
   dispatch(incTotals(index));
+  dispatch(countSubTotal(index));
 };
 
 const decTotals = total => ({
@@ -45,4 +47,18 @@ export const decTotal = dec => dispatch => {
   const index = id.findIndex(i => dec.id === i.id);
 
   dispatch(decTotals(index));
+  dispatch(countSubTotal(index));
+};
+
+const calcSubTotal = data => ({
+  type: CALC_SUBTOTAL,
+  payload: data
+});
+
+export const countSubTotal = index => dispatch => {
+  const item = store.getState().cart.cart[index];
+  const price = parseInt(item.price);
+  const subTotal = item.total * price;
+
+  dispatch(calcSubTotal({ subTotal, index }));
 };
