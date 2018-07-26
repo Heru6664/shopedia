@@ -52,7 +52,9 @@ class Sidebar extends Component {
             <View>
               <View style={styles.headerProfile}>
                 <View style={styles.profilePhoto}>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate("Profile")}
+                  >
                     <Left>
                       <Image
                         source={require("../images/tokopedia/defaultProfile.png")}

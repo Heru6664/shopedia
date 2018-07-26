@@ -19,6 +19,7 @@ import {
 } from "native-base";
 import { connect } from "react-redux";
 import { TouchableOpacity, FlatList } from "react-native";
+import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
 class Details extends Component {
   Capitalize(str) {
@@ -65,6 +66,7 @@ class Details extends Component {
   render() {
     return (
       <Container>
+        <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
@@ -92,7 +94,9 @@ class Details extends Component {
               </Text>
             </CardItem>
             <CardItem style={styles.chgAddress}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Address")}
+              >
                 <Text>Change Address</Text>
               </TouchableOpacity>
             </CardItem>

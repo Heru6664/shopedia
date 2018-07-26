@@ -16,9 +16,11 @@ import Review from "../screen/order/Review";
 import Checkout from "../screen/order/Checkout";
 import Details from "../screen/order/Details";
 import Category from "../screen/app/Category";
+import Address from "../screen/user/Address";
 
 const navigation = createStackNavigator(
   {
+    Address: Address,
     MainScreen: MainScreen,
     Login: Login,
     Profile: Profile,
@@ -32,7 +34,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "MainScreen"
+    initialRouteName: "Profile"
   }
 );
 

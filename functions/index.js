@@ -53,6 +53,9 @@ exports.loginAuth = functions.https.onRequest((request, response) => {
         password: "123123",
         address: "cijeunjing st",
         first_name: "heru",
+        phone: "0895322072106",
+        birthdate: "15 Juli 1999",
+        gender: "male",
         last_name: "julyanto"
       }
     });
