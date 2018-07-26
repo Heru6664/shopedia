@@ -1,12 +1,30 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import styles from "./style/Profile";
+import {
+  Container,
+  Content,
+  Header,
+  Left,
+  Button,
+  Icon,
+  View
+} from "native-base";
 
 export default class Profile extends Component {
   render() {
     return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
+      <Container>
+        <Header>
+          <Left>
+            <Button onPress={() => this.props.navigation.goBack()} transparent>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+        </Header>
+        <Content>
+          <View />
+        </Content>
+      </Container>
     );
   }
 }
