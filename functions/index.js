@@ -1,6 +1,13 @@
 const functions = require("firebase-functions");
 const faker = require("faker");
 const _ = require("lodash");
+const admin = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://shopedia-10ff0.firebaseio.com/"
+});
 
 exports.products = functions.https.onRequest((request, response) => {
   const categories = [
@@ -44,21 +51,16 @@ exports.products = functions.https.onRequest((request, response) => {
 exports.loginAuth = functions.https.onRequest((request, response) => {
   const email = request.body.email;
   const password = request.body.password;
+  const db = admin.database();
 
   if (email === "heru@heru.com" && password === "123123") {
-    response.status(200);
-    response.json({
-      user: {
-        email: "heru@heru.com",
-        password: "123123",
-        address: "cijeunjing st",
-        first_name: "heru",
-        phone: "0895322072106",
-        birthdate: "15 Juli 1999",
-        gender: "male",
-        last_name: "julyanto"
-      }
+    const ref = db.ref("user/0");
+    ref.once("value", data => {
+      response.status(200);
+      response.json(data);
     });
+
+    response.status(200);
   } else if (email === "" && password === "") {
     response.status(401);
     response.json({
@@ -70,4 +72,18 @@ exports.loginAuth = functions.https.onRequest((request, response) => {
       errorMessage: "Incorrect email or password"
     });
   }
+});
+
+exports.updateProfile = functions.https.onRequest((request, response) => {
+  admin
+    .database()
+    .ref("user/0")
+    .set(request.body, error => {
+      if (error) {
+        response.status(500);
+      } else {
+        response.status(200);
+        response.json(request.body);
+      }
+    });
 });

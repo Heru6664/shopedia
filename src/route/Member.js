@@ -17,9 +17,11 @@ import Checkout from "../screen/order/Checkout";
 import Details from "../screen/order/Details";
 import Category from "../screen/app/Category";
 import Address from "../screen/user/Address";
+import EditProfile from "../screen/user/EditProfile";
 
 const navigation = createStackNavigator(
   {
+    EditProfile: EditProfile,
     Address: Address,
     MainScreen: MainScreen,
     Login: Login,
@@ -34,7 +36,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Address"
+    initialRouteName: "EditProfile"
   }
 );
 

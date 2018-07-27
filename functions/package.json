@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "faker": "^4.1.0",
-    "firebase-admin": "~5.12.1",
+    "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.0.3",
     "lodash": "^4.17.10"
   },

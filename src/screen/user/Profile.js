@@ -12,11 +12,9 @@ import {
   Body,
   Text,
   CardItem,
-  Card,
-  ListItem,
-  List
+  Card
 } from "native-base";
-import { TouchableOpacity, FlatList } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styles from "./style/Profile";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 
@@ -53,7 +51,12 @@ class Profile extends Component {
                       " " +
                       this.Capitalize(this.props.user.last_name)}
                   </Text>
-                  <Button style={styles.btnEdit}>
+                  <Button
+                    onPress={() =>
+                      this.props.navigation.navigate("EditProfile")
+                    }
+                    style={styles.btnEdit}
+                  >
                     <Icon
                       style={styles.btnTxt}
                       name="ios-settings"
