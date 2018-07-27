@@ -35,12 +35,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  touchAct: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
   border: {
     borderRightWidth: 0.3,
     borderRightColor: "grey"
   },
   titleData: {
     fontWeight: "bold"
+  },
+  head: {
+    marginBottom: -11
+  },
+  item: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: "rgba(0,0,0,0.2)"
   }
 });
 

@@ -34,7 +34,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Profile"
+    initialRouteName: "Address"
   }
 );
 

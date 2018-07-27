@@ -13,7 +13,8 @@ import {
   Text,
   CardItem,
   Card,
-  ListItem
+  ListItem,
+  List
 } from "native-base";
 import { TouchableOpacity, FlatList } from "react-native";
 import styles from "./style/Profile";
@@ -23,29 +24,6 @@ class Profile extends Component {
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-
-  renderData = item => {
-    console.log("item:", item)(
-      <View>
-        <ListItem>
-          <Text note>Phone Number</Text>
-          <Text>{item.phone}</Text>
-        </ListItem>
-        <ListItem>
-          <Text note>Email</Text>
-          <Text>{item.email}</Text>
-        </ListItem>
-        <ListItem>
-          <Text note>Gender</Text>
-          <Text>{item.gender}</Text>
-        </ListItem>
-        <ListItem>
-          <Text note>Birth Date</Text>
-          <Text>{item.birthdate}</Text>
-        </ListItem>
-      </View>
-    );
-  };
 
   render() {
     return (
@@ -62,11 +40,13 @@ class Profile extends Component {
           <Card>
             <CardItem>
               <View style={styles.viewProfile}>
-                <Thumbnail
-                  style={styles.profilePhoto}
-                  large
-                  source={require("../../assets/images/tokopedia/defaultProfile.png")}
-                />
+                <TouchableOpacity>
+                  <Thumbnail
+                    style={styles.profilePhoto}
+                    large
+                    source={require("../../assets/images/tokopedia/defaultProfile.png")}
+                  />
+                </TouchableOpacity>
                 <Body style={styles.bodyName}>
                   <Text style={styles.name}>
                     {this.Capitalize(this.props.user.first_name) +
@@ -87,13 +67,13 @@ class Profile extends Component {
             <CardItem>
               <View style={styles.viewProfile}>
                 <View style={[styles.foll, styles.border]}>
-                  <TouchableOpacity>
+                  <TouchableOpacity style={styles.touchAct}>
                     <Text>0</Text>
                     <Text>Following</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.foll}>
-                  <TouchableOpacity>
+                  <TouchableOpacity style={styles.touchAct}>
                     <Text>0</Text>
                     <Text>Favorite Store</Text>
                   </TouchableOpacity>
@@ -108,14 +88,40 @@ class Profile extends Component {
             <CardItem>
               <Text note>This info can only be seen by you</Text>
             </CardItem>
-
-            <CardItem>
-              <FlatList
-                data={this.props.user}
-                renderItem={({ item }) => this.renderData(item)}
-                keyExtractor={(item, index) => index.toString()}
-              />
-            </CardItem>
+            <View>
+              <View style={styles.item}>
+                <CardItem style={styles.head}>
+                  <Text note>Phone Number</Text>
+                </CardItem>
+                <CardItem>
+                  <Text>{this.props.user.phone}</Text>
+                </CardItem>
+              </View>
+              <View style={styles.item}>
+                <CardItem style={styles.head}>
+                  <Text note>Email</Text>
+                </CardItem>
+                <CardItem>
+                  <Text>{this.props.user.email}</Text>
+                </CardItem>
+              </View>
+              <View style={styles.item}>
+                <CardItem style={styles.head}>
+                  <Text note>Gender</Text>
+                </CardItem>
+                <CardItem>
+                  <Text>{this.props.user.gender}</Text>
+                </CardItem>
+              </View>
+              <View style={styles.item}>
+                <CardItem style={styles.head}>
+                  <Text note>Birth Date</Text>
+                </CardItem>
+                <CardItem>
+                  <Text>{this.props.user.birthdate}</Text>
+                </CardItem>
+              </View>
+            </View>
           </Card>
         </Content>
       </Container>
