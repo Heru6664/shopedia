@@ -69,7 +69,7 @@ class Address extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.user.user
+  user: auth.user
 });
 
 export default connect(mapStateToProps)(Address);

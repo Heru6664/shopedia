@@ -297,7 +297,7 @@ class Sidebar extends Component {
 
 mapStateToProps = ({ auth }) => ({
   isLogin: auth.isLogin,
-  user: auth.user.user
+  user: auth.user
 });
 
 const mapDispatchToProps = dispatch => ({

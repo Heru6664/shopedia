@@ -53,7 +53,7 @@ class Profile extends Component {
                   </Text>
                   <Button
                     onPress={() =>
-                      this.props.navigation.navigate("EditProfile")
+                      this.props.navigation.navigate("SettingAccount")
                     }
                     style={styles.btnEdit}
                   >
@@ -133,7 +133,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.user.user
+  user: auth.user
 });
 
 export default connect(mapStateToProps)(Profile);

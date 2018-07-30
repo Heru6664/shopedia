@@ -10,14 +10,32 @@ import {
   Card,
   Text,
   View,
-  CardItem
+  CardItem,
+  Right
 } from "native-base";
 import { Image, TouchableOpacity, TextInput } from "react-native";
+import { MKRadioButton } from "react-native-material-kit";
 
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import styles from "./style/EditProfile";
+import { updateProfile } from "../../actions/editProfile";
 
 class EditProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.radioGroup = new MKRadioButton.Group();
+    this.state = {
+      fullname: props.user.fullname,
+      birthdate: props.user.birthdate,
+      email: props.user.email,
+      phone: props.user.phone,
+      isMale: false,
+      gender: "",
+      password: props.user.password,
+      address: props.user.address
+    };
+  }
+
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -56,11 +74,11 @@ class EditProfile extends Component {
                 <Text note>Name</Text>
               </CardItem>
               <CardItem>
-                <Text>
-                  {this.Capitalize(this.props.user.first_name) +
-                    " " +
-                    this.Capitalize(this.props.user.last_name)}
-                </Text>
+                <TextInput
+                  style={styles.inputBirthdate}
+                  value={this.Capitalize(this.props.user.fullname)}
+                  onChangeText={val => this.setState({ fullname: val })}
+                />
               </CardItem>
             </View>
             <View>
@@ -71,6 +89,7 @@ class EditProfile extends Component {
                 <TextInput
                   style={styles.inputBirthdate}
                   value={this.props.user.birthdate}
+                  onChangeText={val => this.setState({ birthdate: val })}
                 />
               </CardItem>
             </View>
@@ -78,9 +97,57 @@ class EditProfile extends Component {
               <CardItem style={styles.head}>
                 <Text note>Gender</Text>
               </CardItem>
-              <CardItem />
+              <CardItem>
+                <MKRadioButton
+                  onCheckedChange={t => this.setState({ isMale: t.checked })}
+                  checked={this.props.user.gender === "male"}
+                  group={this.radioGroup}
+                />
+                <Text>Male</Text>
+                <MKRadioButton
+                  onCheckedChange={t => this.setState({ isMale: !t.checked })}
+                  checked={this.props.user.gender === "female"}
+                  group={this.radioGroup}
+                />
+                <Text>Female</Text>
+              </CardItem>
             </View>
           </Card>
+          <Card>
+            <CardItem style={styles.headCard}>
+              <Text>Edit Contact</Text>
+            </CardItem>
+            <View>
+              <CardItem style={styles.head}>
+                <Text note>Email</Text>
+              </CardItem>
+              <CardItem>
+                <TextInput
+                  style={styles.inputBirthdate}
+                  value={this.props.user.email}
+                  onChangeText={val => this.setState({ email: val })}
+                />
+              </CardItem>
+            </View>
+            <View>
+              <CardItem style={styles.head}>
+                <Text note>Phone</Text>
+              </CardItem>
+              <CardItem>
+                <TextInput
+                  style={styles.inputBirthdate}
+                  value={this.props.user.phone}
+                  onChangeText={val => this.setState({ phone: val })}
+                />
+              </CardItem>
+            </View>
+          </Card>
+          <Button
+            onPress={() => this.props.updateProfile(this.state)}
+            style={styles.btnSave}
+          >
+            <Text>Save</Text>
+          </Button>
         </Content>
       </Container>
     );
@@ -88,7 +155,14 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.user.user
+  user: auth.user
 });
 
-export default connect(mapStateToProps)(EditProfile);
+const mapDispatchToProps = dispatch => ({
+  updateProfile: data => dispatch(updateProfile(data))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditProfile);

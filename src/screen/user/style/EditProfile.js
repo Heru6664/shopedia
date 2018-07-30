@@ -39,6 +39,18 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 16,
     padding: 5
+  },
+  color: {
+    color: "#058c06"
+  },
+  btnSave: {
+    backgroundColor: "#3eb346",
+    width: "100%",
+    borderRadius: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 15,
+    marginBottom: 25
   }
 });
 

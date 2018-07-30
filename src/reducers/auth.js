@@ -4,11 +4,17 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from "../actions/constant/auth";
+import {
+  UPDATE_PROFILE_START,
+  UPDATE_PROFILE_FAILED,
+  UPDATE_PROFILE_SUCCESS
+} from "../actions/constant/editProfile";
 
 const initialState = {
   isLogin: false,
   isLoadingLogin: false,
-  user: {}
+  user: {},
+  gender: ""
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +43,21 @@ export default (state = initialState, action) => {
         ...state,
         user: {},
         isLogin: false
+      };
+    case UPDATE_PROFILE_START:
+      return {
+        ...state,
+        isLoadingLogin: true
+      };
+    case UPDATE_PROFILE_FAILED:
+      return {
+        ...state,
+        isLoadingLogin: false
+      };
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        isLoadingLogin: false,
+        user: action.payload
       };
     default:
       return state;

@@ -132,7 +132,7 @@ class Details extends Component {
 }
 
 const mapStateToProps = ({ auth, order }) => ({
-  user: auth.user.user,
+  user: auth.user,
   order
 });
 
