@@ -19,9 +19,11 @@ import Category from "../screen/app/Category";
 import Address from "../screen/user/Address";
 import EditProfile from "../screen/user/EditProfile";
 import SettingAccount from "../screen/user/SettingAccount";
+import EditAddress from "../screen/user/EditAddress";
 
 const navigation = createStackNavigator(
   {
+    EditAddress: EditAddress,
     EditProfile: EditProfile,
     Address: Address,
     MainScreen: MainScreen,
@@ -38,7 +40,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "SettingAccount"
+    initialRouteName: "EditAddress"
   }
 );
 

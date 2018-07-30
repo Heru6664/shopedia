@@ -11,11 +11,13 @@ import {
   Title,
   Body,
   Right,
-  Button
+  Button,
+  View
 } from "native-base";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+import styles from "./style/Address";
 
 class Address extends Component {
   constructor(props) {
@@ -31,33 +33,39 @@ class Address extends Component {
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon name="arrow-back" />
-              <Title>Address</Title>
+              <Title>Address Setting</Title>
             </Button>
           </Left>
-          <Body />
           <Right>
             <Button transparent>
               <Icon type="Entypo" name="plus" />
             </Button>
           </Right>
         </Header>
-        <Content>
+        <Content style={styles.content}>
           <Card>
-            <CardItem>
-              <Text>Home address</Text>
+            <CardItem style={styles.bodyCard}>
+              <Text style={styles.title}>
+                {this.props.user.address.addressAs}
+              </Text>
+              <Text>{this.props.user.address.receiverName}</Text>
+              <Text>{this.props.user.address.address}</Text>
+              <Text>{this.props.user.address.city}</Text>
+              <Text>{this.props.user.address.receiverPhone}</Text>
             </CardItem>
             <CardItem>
-              <Text>{this.props.user.address}</Text>
-            </CardItem>
-            <CardItem>
+              <Left />
+              <Left />
               <Left>
-                <TouchableOpacity>
-                  <Text>Edit</Text>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("EditAddress")}
+                >
+                  <Text style={styles.btn}>Edit</Text>
                 </TouchableOpacity>
               </Left>
               <Right>
                 <TouchableOpacity>
-                  <Text>Delete</Text>
+                  <Text style={styles.btn}>Delete</Text>
                 </TouchableOpacity>
               </Right>
             </CardItem>
