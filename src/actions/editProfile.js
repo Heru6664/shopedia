@@ -22,12 +22,22 @@ const updateProfileSuccess = data => ({
 export const updateProfile = data => dispatch => {
   const gender = data.isMale ? "male" : "female";
   const user = { ...data, gender };
-  dispatch(updateProfileStart());
-  return axios
-    .put(
-      "https://us-central1-shopedia-10ff0.cloudfunctions.net/updateProfile",
-      user
-    )
-    .then(res => dispatch(updateProfileSuccess(res.data)))
-    .catch(err => dispatch(updateProfileFailed(err)));
+
+  return new Promise((resolve, reject) => {
+    dispatch(updateProfileStart());
+    return axios
+      .put(
+        "https://us-central1-shopedia-10ff0.cloudfunctions.net/updateProfile",
+        user
+      )
+      .then(res => {
+        dispatch(updateProfileSuccess(res.data));
+        return resolve(true);
+      })
+      .catch(err => {
+        dispatch(updateProfileFailed(err));
+        reject(error.res.data.err.message);
+        return err;
+      });
+  });
 };

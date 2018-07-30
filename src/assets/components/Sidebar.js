@@ -65,9 +65,7 @@ class Sidebar extends Component {
                 </View>
                 <View>
                   <Text style={styles.userName}>
-                    {this.Capitalize(this.props.user.first_name) +
-                      " " +
-                      this.Capitalize(this.props.user.last_name)}
+                    {this.Capitalize(this.props.user.fullname)}
                   </Text>
                 </View>
               </View>

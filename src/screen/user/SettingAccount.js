@@ -25,11 +25,8 @@ export default class SettingAccount extends Component {
         <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header style={styles.header}>
           <Left>
-            <Button
-              onPress={() => this.props.navigation.openDrawer()}
-              transparent
-            >
-              <Icon style={styles.textHead} name="ios-menu" type="Ionicons" />
+            <Button onPress={() => this.props.navigation.goBack()} transparent>
+              <Icon style={styles.textHead} name="arrow-back" />
               <Text style={styles.textHead}>Account Settings</Text>
             </Button>
           </Left>

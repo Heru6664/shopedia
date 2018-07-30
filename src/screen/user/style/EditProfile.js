@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 15,
     marginBottom: 25
+  },
+  animation: {
+    width: 30,
+    height: 30
   }
 });
 

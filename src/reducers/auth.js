@@ -14,7 +14,8 @@ const initialState = {
   isLogin: false,
   isLoadingLogin: false,
   user: {},
-  gender: ""
+  gender: "",
+  success: false
 };
 
 export default (state = initialState, action) => {
@@ -47,16 +48,20 @@ export default (state = initialState, action) => {
     case UPDATE_PROFILE_START:
       return {
         ...state,
-        isLoadingLogin: true
+        isLoadingLogin: true,
+        success: false
       };
     case UPDATE_PROFILE_FAILED:
       return {
         ...state,
-        isLoadingLogin: false
+        isLoadingLogin: false,
+        success: false
       };
     case UPDATE_PROFILE_SUCCESS:
       return {
+        ...state,
         isLoadingLogin: false,
+        success: true,
         user: action.payload
       };
     default:

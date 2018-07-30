@@ -47,9 +47,7 @@ class Profile extends Component {
                 </TouchableOpacity>
                 <Body style={styles.bodyName}>
                   <Text style={styles.name}>
-                    {this.Capitalize(this.props.user.first_name) +
-                      " " +
-                      this.Capitalize(this.props.user.last_name)}
+                    {this.Capitalize(this.props.user.fullname)}
                   </Text>
                   <Button
                     onPress={() =>

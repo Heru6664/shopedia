@@ -11,12 +11,14 @@ import {
   Text,
   View,
   CardItem,
+  Body,
   Right
 } from "native-base";
 import { Image, TouchableOpacity, TextInput } from "react-native";
 import { MKRadioButton } from "react-native-material-kit";
 
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+import Loading from "../../assets/components/Loading";
 import styles from "./style/EditProfile";
 import { updateProfile } from "../../actions/editProfile";
 
@@ -39,6 +41,12 @@ class EditProfile extends Component {
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+
+  saveChange = () => {
+    this.props
+      .updateProfile(this.state)
+      .then(this.props.navigation.navigate("Profile"));
+  };
 
   render() {
     return (
@@ -142,11 +150,18 @@ class EditProfile extends Component {
               </CardItem>
             </View>
           </Card>
-          <Button
-            onPress={() => this.props.updateProfile(this.state)}
-            style={styles.btnSave}
-          >
-            <Text>Save</Text>
+          <Button onPress={() => this.saveChange()} style={styles.btnSave}>
+            {this.props.isLoading ? (
+              <Content>
+                <Left />
+                <Body>
+                  <Loading style={styles.animation} />
+                </Body>
+                <Right />
+              </Content>
+            ) : (
+              <Text style={styles.text}>Save</Text>
+            )}
           </Button>
         </Content>
       </Container>
@@ -155,7 +170,9 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  user: auth.user
+  user: auth.user,
+  isLoading: auth.isLoadingLogin,
+  isSuccess: auth.success
 });
 
 const mapDispatchToProps = dispatch => ({
