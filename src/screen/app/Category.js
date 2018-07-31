@@ -1,31 +1,68 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import styles from "./styles/Category";
-import { ScrollView, FlatList, TouchableOpacity } from "react-native";
 import {
-  Container,
-  Content,
-  Header,
-  Left,
   Button,
+  Container,
+  FooterTab,
+  Header,
   Icon,
+  Left,
   Text,
-  List,
-  View,
-  ListItem
+  Title,
+  View
 } from "native-base";
-import { routes } from "./Constant/Category";
+import React, { Component } from "react";
+import { FlatList, ScrollView } from "react-native";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+import { routes } from "./Constant/Category";
+import styles from "./styles/Category";
 
 export default class Category extends Component {
-  renderMenu = item => (
+  constructor(props) {
+    super(props);
+    this.state = {
+      route: routes
+    };
+  }
+  renderMenu = (item, index) => (
     <View>
-      <ListItem style={{ flexDirection: "column" }}>
-        <Icon type={item.type} name={item.icon} />
-        <Text>{item.name}</Text>
-      </ListItem>
+      <FooterTab style={styles.listTab}>
+        <Button
+          onPress={() => this.actionBtn(index)}
+          active={item.active}
+          style={item.active ? styles.buttonActive : styles.buttonDisActive}
+        >
+          <Icon type={item.type} name={item.icon} />
+          <Text>{item.name}</Text>
+        </Button>
+      </FooterTab>
     </View>
   );
+
+  actionBtn = index => {
+    this.setState(
+      {
+        route: [
+          ...this.state.route.slice(0, index),
+          {
+            ...this.state.route[index],
+            active: !this.state.route[index].active
+          },
+          ...this.state.route.slice(index + 1)
+        ]
+      },
+      () => {
+        const data = this.state.route;
+        const result = data.map((item, id) => {
+          if (id != index) {
+            item.active = false;
+            return item;
+          }
+          return item;
+        });
+        this.setState({ route: result });
+      }
+    );
+  };
+
   render() {
     return (
       <Container>
@@ -34,34 +71,22 @@ export default class Category extends Component {
           <Left>
             <Button onPress={() => this.props.navigation.goBack()} transparent>
               <Icon name="close" type="EvilIcons" />
+              <Title>Category</Title>
             </Button>
           </Left>
         </Header>
-        <ScrollView
-          style={{
-            width: "25%",
-            height: "100%",
-            backgroundColor: "blue",
-            padding: 0
-          }}
-        >
-          <FlatList
-            data={routes}
-            renderItem={({ item }) => this.renderMenu(item)}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </ScrollView>
-        <ScrollView
-          style={{
-            backgroundColor: "white",
-            width: "75%",
-            height: "100%",
-            marginLeft: "25%",
-            marginTop: "17%",
-            position: "absolute",
-            padding: 10
-          }}
-        />
+        <View>
+          <ScrollView style={styles.containerList}>
+            <FlatList
+              data={this.state.route}
+              renderItem={({ item, index }) => this.renderMenu(item, index)}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </ScrollView>
+          <ScrollView style={styles.renderList}>
+            <Text>aslkdjas</Text>
+          </ScrollView>
+        </View>
       </Container>
     );
   }

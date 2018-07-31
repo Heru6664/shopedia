@@ -41,7 +41,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Address"
+    initialRouteName: "Category"
   }
 );
 
