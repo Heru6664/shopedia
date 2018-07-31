@@ -1,24 +1,22 @@
-import React, { Component } from "react";
 import {
-  Container,
-  Content,
+  Button,
   Card,
   CardItem,
-  Text,
+  Container,
+  Content,
   Header,
   Icon,
   Left,
-  Title,
-  Body,
   Right,
-  Button,
-  View
+  Text,
+  Title
 } from "native-base";
+import React, { Component } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { TouchableOpacity, FlatList } from "react-native";
+import { getAddress } from "../../actions/editAddress";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import styles from "./style/Address";
-import { getAddress } from "../../actions/editAddress";
 
 class Address extends Component {
   constructor(props) {
@@ -43,7 +41,10 @@ class Address extends Component {
             </Button>
           </Left>
           <Right>
-            <Button transparent>
+            <Button
+              onPress={() => this.props.navigation.navigate("AddAddress")}
+              transparent
+            >
               <Icon type="Entypo" name="plus" />
             </Button>
           </Right>

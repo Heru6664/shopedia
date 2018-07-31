@@ -1,28 +1,29 @@
 import React from "react";
 import {
-  createStackNavigator,
   createDrawerNavigator,
+  createStackNavigator,
   DrawerActions
 } from "react-navigation";
-
 import Sidebar from "../assets/components/Sidebar";
-import MainScreen from "../screen/authentication/MainScreen";
-import Login from "../screen/authentication/Login";
-import Profile from "../screen/user/Profile";
+import Category from "../screen/app/Category";
 import ProductDesc from "../screen/app/ProductDesc";
-import Cart from "../screen/order/Cart";
 import Wishlist from "../screen/app/Wishlist";
-import Review from "../screen/order/Review";
+import Login from "../screen/authentication/Login";
+import MainScreen from "../screen/authentication/MainScreen";
+import Cart from "../screen/order/Cart";
 import Checkout from "../screen/order/Checkout";
 import Details from "../screen/order/Details";
-import Category from "../screen/app/Category";
+import Review from "../screen/order/Review";
+import AddAddress from "../screen/user/AddAddress";
 import Address from "../screen/user/Address";
-import EditProfile from "../screen/user/EditProfile";
-import SettingAccount from "../screen/user/SettingAccount";
 import EditAddress from "../screen/user/EditAddress";
+import EditProfile from "../screen/user/EditProfile";
+import Profile from "../screen/user/Profile";
+import SettingAccount from "../screen/user/SettingAccount";
 
 const navigation = createStackNavigator(
   {
+    AddAddress: AddAddress,
     EditAddress: EditAddress,
     EditProfile: EditProfile,
     Address: Address,
