@@ -40,7 +40,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "EditAddress"
+    initialRouteName: "Address"
   }
 );
 

@@ -17,12 +17,11 @@ import {
   Input,
   Body
 } from "native-base";
-import { TextInput } from "react-native";
 
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import Loading from "../../assets/components/Loading";
 import styles from "./style/EditAddress";
-import { editAddress } from "../../actions/editAddress";
+import { editAddress, getAddress } from "../../actions/editAddress";
 
 class EditAddress extends Component {
   constructor(props) {
@@ -64,11 +63,6 @@ class EditAddress extends Component {
               <Title>Address Setting</Title>
             </Button>
           </Left>
-          <Right>
-            <Button transparent>
-              <Icon type="Entypo" name="plus" />
-            </Button>
-          </Right>
         </Header>
         <Content style={styles.content}>
           <Card>
@@ -78,7 +72,7 @@ class EditAddress extends Component {
               </Text>
             </CardItem>
             <CardItem>
-              <TextInput
+              <Input
                 style={styles.textInput}
                 value={this.props.userAddress.addressAs}
                 onChangeText={val =>
@@ -192,12 +186,13 @@ class EditAddress extends Component {
 
 const mapStateToProps = ({ auth }) => ({
   user: auth.user,
-  userAddress: auth.user.address,
+  userAddress: auth.addr,
   isLoading: auth.isLoadingLogin
 });
 
 const mapDispatchToProps = dispatch => ({
-  editAddress: addr => dispatch(editAddress(addr))
+  editAddress: addr => dispatch(editAddress(addr)),
+  getAddress: address => dispatch(getAddress(address))
 });
 
 export default connect(

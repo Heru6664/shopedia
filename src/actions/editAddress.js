@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   EDIT_ADDRESS_START,
   EDIT_ADDRESS_FAILED,
-  EDIT_ADDRESS_SUCCESS
+  EDIT_ADDRESS_SUCCESS,
+  GET_ADDRESS
 } from "./constant/editAddress";
 
 const editAddressStart = () => ({
@@ -38,3 +39,8 @@ export const editAddress = data => dispatch => {
       });
   });
 };
+
+export const getAddress = index => ({
+  type: GET_ADDRESS,
+  payload: index
+});

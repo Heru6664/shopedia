@@ -87,3 +87,17 @@ exports.updateProfile = functions.https.onRequest((request, response) => {
       }
     });
 });
+
+exports.addAddress = functions.https.onRequest((req, res) => {
+  admin
+    .database()
+    .ref("user/0/address")
+    .push(req.body, error => {
+      if (error) {
+        res.status(500);
+      } else {
+        res.status(200);
+        res.json(req.body);
+      }
+    });
+});

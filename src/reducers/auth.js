@@ -12,13 +12,15 @@ import {
 import {
   EDIT_ADDRESS_START,
   EDIT_ADDRESS_FAILED,
-  EDIT_ADDRESS_SUCCESS
+  EDIT_ADDRESS_SUCCESS,
+  GET_ADDRESS
 } from "../actions/constant/editAddress";
 
 const initialState = {
   isLogin: false,
   isLoadingLogin: false,
   user: {},
+  addr: {},
   gender: ""
 };
 
@@ -64,6 +66,11 @@ export default (state = initialState, action) => {
         ...state,
         isLoadingLogin: false,
         user: action.payload
+      };
+    case GET_ADDRESS:
+      return {
+        ...state,
+        addr: action.payload
       };
     case EDIT_ADDRESS_START:
       return {
