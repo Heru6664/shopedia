@@ -7,26 +7,48 @@ import {
   Left,
   Text,
   Title,
-  View
+  View,
+  Card,
+  CardItem
 } from "native-base";
 import React, { Component } from "react";
-import { FlatList, ScrollView } from "react-native";
+import { FlatList, ScrollView, Image, TouchableOpacity } from "react-native";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import { routes } from "./Constant/Category";
 import styles from "./styles/Category";
+import StarRating from "react-native-star-rating";
+import { connect } from "react-redux";
+import Loading from "../../assets/components/Loading";
+import { fetchProduct } from "../../actions/product";
+import { getDetail } from "../../actions/detail";
 
-export default class Category extends Component {
+class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: routes
+      route: routes,
+      categories: ""
     };
+  }
+  handlePress = route => {
+    this.setState({ categories: route }, () => {
+      this.getProduct();
+    });
+  };
+
+  pressProduct = item => {
+    this.props.getDetail(item);
+    this.props.navigation.navigate("ProductDesc");
+  };
+
+  componentDidMount() {
+    this.props.fetchProduct();
   }
   renderMenu = (item, index) => (
     <View>
       <FooterTab style={styles.listTab}>
         <Button
-          onPress={() => this.actionBtn(index)}
+          onPress={() => this.actionBtn(item, index)}
           active={item.active}
           style={item.active ? styles.buttonActive : styles.buttonDisActive}
         >
@@ -37,7 +59,54 @@ export default class Category extends Component {
     </View>
   );
 
-  actionBtn = index => {
+  renderCategory = item => {
+    return (
+      <TouchableOpacity
+        onPress={() => this.pressProduct(item)}
+        style={styles.th}
+      >
+        <Card>
+          <CardItem>
+            <Text>{item.name}</Text>
+          </CardItem>
+          <CardItem>
+            <Image style={styles.img} source={{ uri: item.img }} />
+          </CardItem>
+          <CardItem style={styles.itemContainer}>
+            <Text>$ {item.price}</Text>
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              starSize={15}
+              fullStarColor="#FFD700"
+              halfStarColor="#FFD700"
+              rating={item.rating}
+            />
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
+    );
+  };
+
+  getProduct = () => {
+    const category = this.state.categories;
+    const data = this.props.getProduct.filter(item => {
+      return item.category === category;
+    });
+
+    console.log("data:", data);
+
+    return (
+      <FlatList
+        data={data}
+        renderItem={({ item }) => this.renderCategory(item)}
+        numColumns={2}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    );
+  };
+
+  actionBtn = (item, index) => {
     this.setState(
       {
         route: [
@@ -61,6 +130,7 @@ export default class Category extends Component {
         this.setState({ route: result });
       }
     );
+    this.handlePress(item.cat);
   };
 
   render() {
@@ -84,10 +154,25 @@ export default class Category extends Component {
             />
           </ScrollView>
           <ScrollView style={styles.renderList}>
-            <Text>aslkdjas</Text>
+            {this.props.isLoading ? <Loading /> : this.getProduct()}
           </ScrollView>
         </View>
       </Container>
     );
   }
 }
+
+const mapStateToProps = ({ product }) => ({
+  getProduct: product.product,
+  isLoading: product.loading
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchProduct: product => dispatch(fetchProduct(product)),
+  getDetail: item => dispatch(getDetail(item))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Category);

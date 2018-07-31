@@ -32,6 +32,16 @@ const styles = StyleSheet.create({
     marginLeft: "25%",
     position: "absolute",
     padding: 10
+  },
+  itemContainer: {
+    flexDirection: "column"
+  },
+  th: {
+    width: "50%"
+  },
+  img: {
+    width: 100,
+    height: 100
   }
 });
 

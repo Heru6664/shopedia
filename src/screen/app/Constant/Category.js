@@ -4,70 +4,70 @@ export const routes = [
     icon: "car",
     type: "FontAwesome",
     name: "Car",
-    cat: "Dashboard"
+    cat: "Car"
   },
   {
     active: false,
     icon: "motorcycle",
     type: "FontAwesome",
     name: "Motorcycle",
-    cat: "Profile"
+    cat: "Motorcycle"
   },
   {
     active: false,
     icon: "sofa",
     type: "MaterialCommunityIcons",
     name: "Property",
-    cat: "About"
+    cat: "Property"
   },
   {
     active: false,
     icon: "ios-person",
     type: "Ionicons",
     name: "Personal",
-    cat: "ContactUs"
+    cat: "Personal Purpose"
   },
   {
     active: false,
     icon: "laptop-mac",
     type: "MaterialCommunityIcons",
     name: "Electronic",
-    cat: "Setting"
+    cat: "Electronic"
   },
   {
     active: false,
     icon: "ios-basketball",
     type: "Ionicons",
     name: "Sport",
-    cat: "Setting"
+    cat: "Sport"
   },
   {
     active: false,
     icon: "food",
     type: "MaterialCommunityIcons",
     name: "Household",
-    cat: "Setting"
+    cat: "Household"
   },
   {
     active: false,
     icon: "child-care",
     type: "MaterialIcons",
     name: "Child",
-    cat: "Setting"
+    cat: "Child"
   },
   {
     active: false,
     icon: "industry",
     type: "FontAwesome",
     name: "Industry",
-    cat: "Setting"
+    cat: "Industry"
   },
   {
     active: false,
     icon: "broom",
     type: "MaterialCommunityIcons",
     name: "Service",
-    cat: "Setting"
+    cat: "Service"
   },
   {
     active: false,
