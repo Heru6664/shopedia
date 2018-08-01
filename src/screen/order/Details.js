@@ -82,15 +82,13 @@ class Details extends Component {
           <Card style={styles.card}>
             <CardItem>
               <Text style={styles.name}>
-                {this.Capitalize(this.props.user.first_name) +
-                  " " +
-                  this.Capitalize(this.props.user.last_name)}
+                {this.Capitalize(this.props.user.fullname)}
                 <Text note> (Home Address)</Text>
               </Text>
             </CardItem>
             <CardItem style={styles.address}>
               <Text>
-                {this.props.user.address == "" ? "-" : this.props.user.address}
+                {/* {this.props.user.address == "" ? "-" : this.props.user.address} */}
               </Text>
             </CardItem>
             <CardItem style={styles.chgAddress}>

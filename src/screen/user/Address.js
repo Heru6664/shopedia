@@ -12,11 +12,12 @@ import {
   Title
 } from "native-base";
 import React, { Component } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity, Alert } from "react-native";
 import { connect } from "react-redux";
 import { getAddress } from "../../actions/editAddress";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import styles from "./style/Address";
+import { delAddress } from "../../actions/delAddress";
 
 class Address extends Component {
   constructor(props) {
@@ -27,6 +28,17 @@ class Address extends Component {
   getAddress = item => {
     this.props.getAddress(item);
     this.props.navigation.navigate("EditAddress");
+  };
+
+  deleteThis = item => {
+    Alert.alert(
+      "Delete Address",
+      "are you sure want to delete this. it can't restore anymore",
+      [
+        { text: "Yes", onPress: () => this.props.delAddress(item) },
+        { text: "No" }
+      ]
+    );
   };
 
   render() {
@@ -52,7 +64,7 @@ class Address extends Component {
         <Content style={styles.content}>
           <FlatList
             data={this.props.address}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Card>
                 <CardItem style={styles.bodyCard}>
                   <Text style={styles.title}>{item.addressAs}</Text>
@@ -70,7 +82,7 @@ class Address extends Component {
                     </TouchableOpacity>
                   </Left>
                   <Right>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.deleteThis(item.id)}>
                       <Text style={styles.btn}>Delete</Text>
                     </TouchableOpacity>
                   </Right>
@@ -94,7 +106,8 @@ const mapStateToProps = ({ auth }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAddress: data => dispatch(getAddress(data))
+  getAddress: data => dispatch(getAddress(data)),
+  delAddress: item => dispatch(delAddress(item))
 });
 
 export default connect(

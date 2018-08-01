@@ -96,3 +96,8 @@ exports.addAddress = functions.https.onRequest((req, res) => {
   res.status(200);
   res.json({ [key]: req.body });
 });
+
+exports.delAddress = functions.https.onRequest((req, res) => {
+  const address = admin.database().ref("user/0/address");
+  address;
+});

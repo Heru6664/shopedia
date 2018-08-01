@@ -20,6 +20,7 @@ import {
   ADD_USER_ADDRESS_FAILED,
   ADD_USER_ADDRESS_SUCCESS
 } from "../actions/constant/addAddress";
+import { DELETE_ADDRESS } from "../actions/constant/delAddress";
 
 const initialState = {
   isLogin: false,
@@ -111,6 +112,14 @@ export default (state = initialState, action) => {
         ...state,
         isLoadingLogin: false,
         user: action.payload
+      };
+    case DELETE_ADDRESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          address: action.payload
+        }
       };
     default:
       return state;
