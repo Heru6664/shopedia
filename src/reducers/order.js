@@ -9,7 +9,8 @@ const initialState = {
   item: [],
   amount: 0,
   note: "",
-  paymentMethod: ""
+  paymentMethod: "",
+  status:""
 };
 
 export default (state = initialState, action) => {

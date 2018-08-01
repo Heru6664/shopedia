@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f0f1"
   },
   content: {
-    padding: 10,
+    padding: 0,
     marginBottom: 18
   },
   imageCard: {

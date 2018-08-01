@@ -94,21 +94,13 @@ class ProductDesc extends Component {
             <CardItem header bordered>
               <Text>Seller</Text>
             </CardItem>
-            <CardItem bordered>
-              <Thumbnail source={{ uri: this.props.detail.seller.sellerImg }} />
-              <Text style={styles.seller}>
-                {this.props.detail.seller.sellerName}
-              </Text>
-            </CardItem>
             <CardItem>
-              <Left>
-                <Text>Positive Feedback</Text>
-                <H2 style={{ padding: 10 }}>
-                  {this.props.detail.seller.positiveFeedback}%
-                </H2>
-              </Left>
-              <Body />
-              <Right>
+              <Thumbnail source={{ uri: this.props.detail.seller.sellerImg }} />
+              <View style={{ alignItems: "flex-start" }}>
+                <Text style={styles.seller}>
+                  {this.props.detail.seller.sellerName}
+                </Text>
+
                 <StarRating
                   disabled={true}
                   maxStars={5}
@@ -117,7 +109,40 @@ class ProductDesc extends Component {
                   halfStarColor="#FFD700"
                   rating={this.props.detail.seller.sellerRating}
                 />
-              </Right>
+              </View>
+            </CardItem>
+            <CardItem>
+              <Left>
+                <View style={{ flexDirection: "row" }}>
+                  <Icon name="location" type="EvilIcons" />
+                  <Text style={{ fontSize: 14 }}>
+                    {this.props.detail.seller.sellerPlace}
+                  </Text>
+                </View>
+              </Left>
+              <Body />
+              <View style={{ flexDirection: "row", padding: 2 }}>
+                <Button bordered style={{ width: 100, borderColor: "grey" }}>
+                  <Text style={{ fontSize: 14, color: "black" }}>
+                    Chat Seller
+                  </Text>
+                </Button>
+                <Button
+                  style={{
+                    backgroundColor: "#3eb246",
+                    width: 110,
+                    right: 0,
+                    marginLeft: 12,
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  <Icon name="plus" type="Entypo" />
+                  <Text style={{ fontSize: 14, marginLeft: -20 }}>
+                    Favorite
+                  </Text>
+                </Button>
+              </View>
             </CardItem>
             <CardItem bordered>
               <TouchableOpacity>

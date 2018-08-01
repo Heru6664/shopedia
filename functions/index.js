@@ -37,7 +37,8 @@ exports.products = functions.https.onRequest((request, response) => {
           sellerName: faker.name.firstName(),
           sellerImg: faker.image.avatar(),
           sellerRating: faker.random.number(5),
-          positiveFeedback: faker.random.number(100)
+          positiveFeedback: faker.random.number(100),
+          sellerPlace: faker.address.city()
         },
         feedback: {
           costumer: faker.random.word(),
@@ -95,9 +96,4 @@ exports.addAddress = functions.https.onRequest((req, res) => {
   const key = ref.key;
   res.status(200);
   res.json({ [key]: req.body });
-});
-
-exports.delAddress = functions.https.onRequest((req, res) => {
-  const address = admin.database().ref("user/0/address");
-  address;
 });
