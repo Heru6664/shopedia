@@ -12,12 +12,29 @@ import {
   Card,
   CardItem,
   Thumbnail,
-  Text
+  Text,
+  View
 } from "native-base";
 import { FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import styles from "./styles/Whislist";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+
+class EmptyWishlist extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Wishlist still empty :(</Text>
+        <View>
+          <Text>Find out more product to add your wishlist</Text>
+          <Button>
+            <Text>Explore Product</Text>
+          </Button>
+        </View>
+      </View>
+    );
+  }
+}
 
 class Wishlist extends Component {
   componentWillMount() {
@@ -58,20 +75,25 @@ class Wishlist extends Component {
           </Body>
           <Right />
         </Header>
-        <Content style={styles.content}>
-          <FlatList
-            data={this.props.wishlist}
-            renderItem={({ item }) => this.renderLiked(item)}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </Content>
+        {this.props.length === 0 ? (
+          <EmptyWishlist />
+        ) : (
+          <Content style={styles.content}>
+            <FlatList
+              data={this.props.wishlist}
+              renderItem={({ item }) => this.renderLiked(item)}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </Content>
+        )}
       </Container>
     );
   }
 }
 
-const mapStateToProps = ({ wishlist }) => ({
-  wishlist: wishlist.wishlist
+const mapStateToProps = ({ wishlist, auth }) => ({
+  wishlist: wishlist.wishlist,
+  length: wishlist.length
 });
 
 export default connect(mapStateToProps)(Wishlist);

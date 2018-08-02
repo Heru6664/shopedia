@@ -1,36 +1,49 @@
-import React, { Component } from "react";
-import styles from "./style/Details";
+import accounting from "accounting";
 import {
-  Container,
-  Content,
-  Header,
-  Left,
-  Button,
-  Icon,
   Body,
-  Title,
-  Right,
+  Button,
   Card,
   CardItem,
+  Container,
+  Content,
+  Footer,
+  Header,
+  Icon,
+  Left,
+  Right,
   Text,
   Thumbnail,
-  View,
-  Footer
+  Title,
+  View
 } from "native-base";
+import React, { Component } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { TouchableOpacity, FlatList } from "react-native";
+import { createInvoice } from "../../actions/invoice";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+import styles from "./style/Details";
 
 class Details extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: props.user.email,
+      description: props.order.item.map(data => data.name),
+      item: props.order
+    };
+  }
+
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  handlePayBtn = () => {
+    this.props.createInvoice(this.state);
+  };
 
   renderData = item => (
     <Card>
       <CardItem style={styles.address}>
         <Text note>
-          {" "}
           Seller: <Text>{item.seller.sellerName}</Text>
         </Text>
       </CardItem>
@@ -41,23 +54,17 @@ class Details extends Component {
             <Body>
               <Text>{item.name}</Text>
               <Text note> {item.total} pcs</Text>
-              <Text style={styles.price}>$ {item.price}</Text>
+              <Text style={styles.price}>
+                {accounting.formatMoney(item.price, "IDR ", ",", ".")}
+              </Text>
             </Body>
           </Left>
         </CardItem>
       </CardItem>
-      <CardItem style={styles.address}>
-        <Text>Delivery Courier</Text>
-        <Right>
-          <Button style={styles.selectCourier}>
-            <Text>Select Courier</Text>
-          </Button>
-        </Right>
-      </CardItem>
       <CardItem>
         <Text>Sub Total</Text>
         <Right>
-          <Text>$ {item.subTotal}</Text>
+          <Text>{accounting.formatMoney(item.subTotal, "IDR ", ",", ".")}</Text>
         </Right>
       </CardItem>
     </Card>
@@ -113,16 +120,38 @@ class Details extends Component {
                 <Text note>({this.props.order.item.length} Product)</Text>
               </Text>
               <Right>
-                <Text>$ {this.props.order.amount}</Text>
+                <Text>
+                  {accounting.formatMoney(
+                    this.props.order.amount,
+                    "IDR ",
+                    ",",
+                    "."
+                  )}
+                </Text>
               </Right>
             </CardItem>
           </Card>
         </Content>
         <Footer>
-          <Left>
+          <Left style={styles.footerContent}>
             <Text>Total Bill</Text>
-            <Text note>-</Text>
+            <Text note>
+              {accounting.formatMoney(
+                this.props.order.amount,
+                "IDR ",
+                ",",
+                "."
+              )}
+            </Text>
           </Left>
+          <Right>
+            <Button
+              onPress={() => this.handlePayBtn()}
+              style={styles.payButton}
+            >
+              <Text>Pay</Text>
+            </Button>
+          </Right>
         </Footer>
       </Container>
     );
@@ -134,4 +163,11 @@ const mapStateToProps = ({ auth, order }) => ({
   order
 });
 
-export default connect(mapStateToProps)(Details);
+const mapDispatchToProps = dispatch => ({
+  createInvoice: inv => dispatch(createInvoice(inv))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Details);

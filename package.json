@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
     "axios": "^0.18.0",
+    "faker": "^4.1.0",
     "lodash": "^4.17.10",
     "lottie-react-native": "^2.5.0",
     "native-base": "^2.7.1",

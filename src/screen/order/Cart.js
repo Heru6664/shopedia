@@ -1,40 +1,40 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import accounting from "accounting";
 import {
-  Card,
-  Container,
-  Header,
-  Left,
-  Button,
-  Icon,
   Body,
-  Title,
-  Right,
-  Content,
+  Button,
+  Card,
   CardItem,
-  Thumbnail,
-  Text,
-  H2,
+  Container,
+  Content,
   Footer,
   FooterTab,
+  Header,
+  Icon,
+  Left,
+  Right,
+  Text,
+  Thumbnail,
+  Title,
   View
 } from "native-base";
+import React, { Component } from "react";
 import {
   FlatList,
-  TouchableOpacity,
+  KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   StatusBar,
+  StyleSheet,
   TextInput,
-  KeyboardAvoidingView
+  TouchableOpacity
 } from "react-native";
-import { remvFromCart, incTotal, decTotal } from "../../actions/cart";
-import styles from "./style/Cart";
+import { connect } from "react-redux";
+import { decTotal, incTotal, remvFromCart } from "../../actions/cart";
 import {
   addItemPrice,
-  addShoppingItem,
-  addSellerNote
+  addSellerNote,
+  addShoppingItem
 } from "../../actions/order";
+import styles from "./style/Cart";
 
 const DefaultStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[statusBar.statusBar, { backgroundColor }]}>
@@ -92,7 +92,7 @@ class Cart extends Component {
     let val = 0;
     this.props.cart.cart.forEach(data => {
       for (let a = 0; a < data.total; a++) {
-        val += parseFloat(data.price);
+        val += parseInt(data.price);
       }
     });
     return val;
@@ -102,7 +102,7 @@ class Cart extends Component {
     if (this.props.isLogin) {
       this.props.addSellerNote(this.state.message);
       this.props.addShoppingItem(this.props.cart.cart);
-      this.props.navigation.navigate("Review");
+      this.props.navigation.navigate("Details");
     } else {
       this.props.navigation.navigate("Login");
     }
@@ -136,7 +136,9 @@ class Cart extends Component {
               <Thumbnail source={{ uri: item.img }} />
               <Body>
                 <Text>{item.name}</Text>
-                <Text note>$ {item.price}</Text>
+                <Text note>
+                  {accounting.formatMoney(item.price, "IDR ", ",", ".")}
+                </Text>
               </Body>
             </Left>
           </CardItem>
@@ -209,7 +211,14 @@ class Cart extends Component {
                     <Text note>Total Amount:</Text>
                   </CardItem>
                   <CardItem>
-                    <Text>$ {this.props.amount}</Text>
+                    <Text>
+                      {accounting.formatMoney(
+                        this.props.amount,
+                        "IDR ",
+                        ",",
+                        "."
+                      )}
+                    </Text>
                   </CardItem>
                 </View>
                 <Right>

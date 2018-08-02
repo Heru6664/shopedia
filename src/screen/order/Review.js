@@ -52,7 +52,10 @@ class Review extends Component {
                     <H3>$ {this.props.order.amount}</H3>
                   </Left>
                   <Right>
-                    <Button onPress={() => this.props.navigation.navigate("Cart")} transparent>
+                    <Button
+                      onPress={() => this.props.navigation.navigate("Cart")}
+                      transparent
+                    >
                       <Text>Show Details</Text>
                     </Button>
                   </Right>
@@ -108,25 +111,10 @@ class Review extends Component {
               />
             </CardItem>
           </Card>
+
           <Card>
             <CardItem>
-              <Text>Credit Card</Text>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Icon name="credit-card" type="EvilIcons" />
-                <Left>
-                  <Text>Credit Card</Text>
-                </Left>
-              </Left>
-              <Right>
-                <Icon name="chevron-right" type="Entypo" />
-              </Right>
-            </CardItem>
-          </Card>
-          <Card>
-            <CardItem>
-              <Text>Store</Text>
+              <Text>Retail</Text>
             </CardItem>
             <CardItem>
               <FlatList

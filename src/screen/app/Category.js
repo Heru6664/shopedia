@@ -1,5 +1,8 @@
+import accounting from "accounting";
 import {
   Button,
+  Card,
+  CardItem,
   Container,
   FooterTab,
   Header,
@@ -7,20 +10,18 @@ import {
   Left,
   Text,
   Title,
-  View,
-  Card,
-  CardItem
+  View
 } from "native-base";
 import React, { Component } from "react";
-import { FlatList, ScrollView, Image, TouchableOpacity } from "react-native";
+import { FlatList, Image, ScrollView, TouchableOpacity } from "react-native";
+import StarRating from "react-native-star-rating";
+import { connect } from "react-redux";
+import { getDetail } from "../../actions/detail";
+import { fetchProduct } from "../../actions/product";
+import Loading from "../../assets/components/Loading";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import { routes } from "./Constant/Category";
 import styles from "./styles/Category";
-import StarRating from "react-native-star-rating";
-import { connect } from "react-redux";
-import Loading from "../../assets/components/Loading";
-import { fetchProduct } from "../../actions/product";
-import { getDetail } from "../../actions/detail";
 
 class Category extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Category extends Component {
             <Image style={styles.img} source={{ uri: item.img }} />
           </CardItem>
           <CardItem style={styles.itemContainer}>
-            <Text>$ {item.price}</Text>
+            <Text>{accounting.formatMoney(item.price, "IDR ", ",", ".")}</Text>
             <StarRating
               disabled={true}
               maxStars={5}

@@ -1,6 +1,7 @@
+import accounting from "accounting";
+import { Card, CardItem, Text } from "native-base";
 import React from "react";
-import { CardItem, Card, Text } from "native-base";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 
 export default ({ item, pressProduct }) => (
   <TouchableOpacity onPress={() => pressProduct(item)} style={styles.th}>
@@ -15,7 +16,7 @@ export default ({ item, pressProduct }) => (
         />
       </CardItem>
       <CardItem style={styles.itemContainer}>
-        <Text>$ {item.price}</Text>
+        <Text>{accounting.formatMoney(item.price, "IDR ", ",", ".")}</Text>
       </CardItem>
     </Card>
   </TouchableOpacity>

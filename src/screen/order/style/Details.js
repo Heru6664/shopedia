@@ -22,6 +22,18 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     marginTop: 20
+  },
+  footerContent: {
+    paddingHorizontal: 12
+  },
+  payButton: {
+    width: "100%",
+    height: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f85420",
+    borderRadius: 0,
+    marginRight: 15,
   }
 });
 

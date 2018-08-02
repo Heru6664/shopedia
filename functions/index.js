@@ -27,7 +27,7 @@ exports.products = functions.https.onRequest((request, response) => {
       return {
         id: index,
         name: faker.commerce.productName(),
-        price: faker.commerce.price(),
+        price: faker.finance.amount(1100, 500000),
         description: faker.lorem.sentences(),
         category: categories[faker.random.number(9)],
         like: false,

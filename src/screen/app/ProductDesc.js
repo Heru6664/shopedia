@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import accounting from "accounting";
 import {
-  Container,
-  Header,
-  Left,
+  Badge,
+  Body,
   Button,
-  Icon,
-  Title,
-  Content,
   Card,
   CardItem,
-  Text,
-  Body,
-  Right,
-  Thumbnail,
-  H2,
+  Container,
+  Content,
   Footer,
   FooterTab,
-  Badge,
+  Header,
+  Icon,
+  Left,
+  Right,
+  Text,
+  Thumbnail,
+  Title,
   View
 } from "native-base";
-import StarRating from "react-native-star-rating";
+import React, { Component } from "react";
 import { Image, TouchableOpacity } from "react-native";
-import styles from "./styles/ProductDesc";
-import { addWishlist } from "../../actions/wishlist";
+import StarRating from "react-native-star-rating";
+import { connect } from "react-redux";
 import { addItemCart } from "../../actions/cart";
+import { addWishlist } from "../../actions/wishlist";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
+import styles from "./styles/ProductDesc";
 
 class ProductDesc extends Component {
   state = {
@@ -72,7 +72,14 @@ class ProductDesc extends Component {
               />
             </CardItem>
             <CardItem>
-              <Text>$ {this.props.detail.price}</Text>
+              <Text>
+                {accounting.formatMoney(
+                  this.props.detail.price,
+                  "IDR ",
+                  ",",
+                  "."
+                )}
+              </Text>
             </CardItem>
           </Card>
 
