@@ -4,7 +4,8 @@ import {
   REMOVE_ITEM_FROM_CART,
   INC_TOTAL,
   DEC_TOTAL,
-  CALC_SUBTOTAL
+  CALC_SUBTOTAL,
+  CLEAR_CART
 } from "./constant/cart";
 
 export const addItemCart = item => ({
@@ -62,3 +63,7 @@ export const countSubTotal = index => dispatch => {
 
   dispatch(calcSubTotal({ subTotal, index }));
 };
+
+export const clearCart = () => ({
+  type: CLEAR_CART
+});

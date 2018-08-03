@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   loading: false,
-  invoice: {}
+  invoice: []
 };
 
 export default (state = initialState, action) => {
@@ -39,13 +39,14 @@ export default (state = initialState, action) => {
     case GET_INVOICE_FAILED:
       return {
         ...state,
-        loading: false
+        loading: false,
+        invoice: action.payload
       };
     case GET_INVOICE_SUCCESS:
       return {
         ...state,
         loading: false,
-        invoice: action.payload
+        invoice: [...state.invoice]
       };
     default:
       return state;

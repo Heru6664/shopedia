@@ -22,33 +22,37 @@ const createInvoiceSuccess = data => ({
 });
 
 export const createInvoice = item => dispatch => {
-  const externalId = faker.random.alphaNumeric(16);
-  const descriptions = item.description.toString();
+  return new Promise((resolve, reject) => {
+    const externalId = faker.random.alphaNumeric(16);
+    const descriptions = item.description.toString();
 
-  dispatch(createInvoiceStart());
-  return axios
-    .post(
-      "https://api.xendit.co/v2/invoices",
-      {
-        external_id: externalId,
-        amount: item.item.amount,
-        payer_email: item.email,
-        description: descriptions
-      },
-      {
-        auth: {
-          username:
-            "xnd_development_Po6AfL4i1LP+nZNtfuBPHj6TM9GkqIMowia0+Rxg/mTW+bykDQB0gA==",
-          password: ""
+    dispatch(createInvoiceStart());
+    return axios
+      .post(
+        "https://api.xendit.co/v2/invoices",
+        {
+          external_id: externalId,
+          amount: item.item.amount,
+          payer_email: item.email,
+          description: descriptions
+        },
+        {
+          auth: {
+            username:
+              "xnd_development_Po6AfL4i1LP+nZNtfuBPHj6TM9GkqIMowia0+Rxg/mTW+bykDQB0gA==",
+            password: ""
+          }
         }
-      }
-    )
-    .then(response => {
-      dispatch(createInvoiceSuccess(response.data));
-    })
-    .catch(error => {
-      dispatch(createInvoiceFailed(error));
-    });
+      )
+      .then(response => {
+        dispatch(createInvoiceSuccess(response.data));
+        return resolve(true);
+      })
+      .catch(error => {
+        dispatch(createInvoiceFailed(error));
+        reject(true);
+      });
+  });
 };
 
 const getInvoiceStart = () => ({
@@ -77,6 +81,6 @@ export const getInvoice = data => dispatch => {
       dispatch(getInvoiceSuccess(res.data));
     })
     .catch(e => {
-      dispatch(getInvoiceFailed(e));
+      dispatch(getInvoiceFailed(e.data));
     });
 };

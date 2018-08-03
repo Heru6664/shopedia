@@ -18,10 +18,13 @@ import {
 } from "native-base";
 import React, { Component } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
+import Modal from "react-native-modalbox";
 import { connect } from "react-redux";
 import { createInvoice } from "../../actions/invoice";
+import Loading from "../../assets/components/Loading";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import styles from "./style/Details";
+import { clearCart } from "../../actions/cart";
 
 class Details extends Component {
   constructor(props) {
@@ -32,12 +35,19 @@ class Details extends Component {
       item: props.order
     };
   }
+  componentWillMount() {}
 
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   handlePayBtn = () => {
-    this.props.createInvoice(this.state);
+    this.props
+      .createInvoice(this.state)
+      .then(() => {
+        this.props.navigation.navigate("Result");
+        this.props.clearCart();
+      })
+      .catch(e => console.warn(e));
   };
 
   renderData = item => (
@@ -73,6 +83,17 @@ class Details extends Component {
   render() {
     return (
       <Container>
+        <Modal
+          style={styles.modal}
+          swipeToClose={false}
+          backdropPressToClose={false}
+          swipeArea={0}
+          coverScreen={true}
+          position={"center"}
+          isOpen={this.props.loading}
+        >
+          <Loading style={styles.animation} />
+        </Modal>
         <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
         <Header>
           <Left>
@@ -158,13 +179,15 @@ class Details extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, order }) => ({
+const mapStateToProps = ({ auth, order, invoice }) => ({
   user: auth.user,
+  loading: invoice.loading,
   order
 });
 
 const mapDispatchToProps = dispatch => ({
-  createInvoice: inv => dispatch(createInvoice(inv))
+  createInvoice: inv => dispatch(createInvoice(inv)),
+  clearCart: item => dispatch(clearCart(item))
 });
 
 export default connect(

@@ -33,7 +33,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f85420",
     borderRadius: 0,
-    marginRight: 15,
+    marginRight: 15
+  },
+  modal: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.2)",
+    width: 60,
+    height: 60
+  },
+  animation: {
+    width: 50,
+    height: 50
   }
 });
 

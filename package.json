@@ -18,6 +18,7 @@
     "react-native": "0.56.0",
     "react-native-collapsible": "^0.13.0",
     "react-native-material-kit": "^0.5.1",
+    "react-native-modalbox": "^1.6.0",
     "react-native-snap-carousel": "^3.7.2",
     "react-native-star-rating": "^1.0.9",
     "react-native-step-indicator": "^0.0.9",

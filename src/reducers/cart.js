@@ -3,7 +3,8 @@ import {
   REMOVE_ITEM_FROM_CART,
   INC_TOTAL,
   DEC_TOTAL,
-  CALC_SUBTOTAL
+  CALC_SUBTOTAL,
+  CLEAR_CART
 } from "../actions/constant/cart";
 
 const initialState = {
@@ -58,6 +59,11 @@ export default (state = initialState, action) => {
           },
           ...state.cart.slice(action.payload + 1)
         ]
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: []
       };
     default:
       return state;
