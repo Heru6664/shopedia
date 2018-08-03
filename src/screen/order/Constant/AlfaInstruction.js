@@ -20,7 +20,7 @@ export const alfa = [
   {
     step: "5",
     val:
-      " Terimalah tanda terima pembayaran dari Alfamart sebagai bukti pembayaran"
+      "Terimalah tanda terima pembayaran dari Alfamart sebagai bukti pembayaran"
   },
   { step: "6", val: "Selamat! Pembayaran Anda sudah selesai." }
 ];

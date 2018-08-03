@@ -22,7 +22,6 @@ class AlfaInstruction extends Component {
   render() {
     const alfaCode = this.props.invoice.invoice.available_retail_outlets[0]
       .payment_code;
-    console.log(alfaCode);
     return (
       <Container>
         <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
@@ -37,8 +36,8 @@ class AlfaInstruction extends Component {
         <Content>
           <Text>Your payment code:{alfaCode}</Text>
           <Text note>
-            Silahkan baca petunjuk di bawah ini untuk menyelesaikan transaksi
-            anda. Kami sarankan Anda untuk menyimpan halaman ini.
+            Please read the instructions below to complete your transaction. We
+            recommend that you save this page.
           </Text>
           <FlatList
             data={alfa}
