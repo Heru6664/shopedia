@@ -9,7 +9,6 @@ import {
   Icon,
   Left,
   Footer,
-  Button,
   Right
 } from "native-base";
 import { Image, FlatList, TouchableOpacity } from "react-native";

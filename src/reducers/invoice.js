@@ -1,7 +1,10 @@
 import {
   CREATE_INVOICE_START,
   CREATE_INVOICE_FAILED,
-  CREATE_INVOICE_SUCCESS
+  CREATE_INVOICE_SUCCESS,
+  GET_INVOICE_START,
+  GET_INVOICE_FAILED,
+  GET_INVOICE_SUCCESS
 } from "../actions/constant/invoice";
 
 const initialState = {
@@ -23,6 +26,22 @@ export default (state = initialState, action) => {
         invoice: action.payload
       };
     case CREATE_INVOICE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        invoice: action.payload
+      };
+    case GET_INVOICE_START:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_INVOICE_FAILED:
+      return {
+        ...state,
+        loading: false
+      };
+    case GET_INVOICE_SUCCESS:
       return {
         ...state,
         loading: false,

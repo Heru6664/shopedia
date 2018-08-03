@@ -10,9 +10,11 @@ import ProductDesc from "../screen/app/ProductDesc";
 import Wishlist from "../screen/app/Wishlist";
 import Login from "../screen/authentication/Login";
 import MainScreen from "../screen/authentication/MainScreen";
+import Bill from "../screen/order/Bill";
 import Cart from "../screen/order/Cart";
 import Checkout from "../screen/order/Checkout";
 import Details from "../screen/order/Details";
+import Instruction from "../screen/order/Instruction";
 import Review from "../screen/order/Review";
 import AddAddress from "../screen/user/AddAddress";
 import Address from "../screen/user/Address";
@@ -23,6 +25,8 @@ import SettingAccount from "../screen/user/SettingAccount";
 
 const navigation = createStackNavigator(
   {
+    Instruction: Instruction,
+    Bill: Bill,
     AddAddress: AddAddress,
     EditAddress: EditAddress,
     EditProfile: EditProfile,
@@ -41,7 +45,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "MainScreen"
+    initialRouteName: "Bill"
   }
 );
 

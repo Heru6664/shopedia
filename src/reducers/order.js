@@ -10,7 +10,7 @@ const initialState = {
   amount: 0,
   note: "",
   paymentMethod: "",
-  status:""
+  status: ""
 };
 
 export default (state = initialState, action) => {
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
     case ADD_PAYMENT_METHOD:
       return {
         ...state,
-        paymentMethod: action.payload.name
+        paymentMethod: action.payload
       };
     default:
       return state;
