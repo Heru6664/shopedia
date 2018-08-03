@@ -22,9 +22,11 @@ import EditAddress from "../screen/user/EditAddress";
 import EditProfile from "../screen/user/EditProfile";
 import Profile from "../screen/user/Profile";
 import SettingAccount from "../screen/user/SettingAccount";
+import AlfaInstruction from "../screen/order/AlfaInstruction";
 
 const navigation = createStackNavigator(
   {
+    AlfaInstruction: AlfaInstruction,
     Instruction: Instruction,
     Bill: Bill,
     AddAddress: AddAddress,

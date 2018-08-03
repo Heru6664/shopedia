@@ -53,7 +53,7 @@ class Bill extends Component {
   };
   retailMethod = item => {
     this.props.addPaymentMethod(item.retail_outlet_name);
-    this.props.navigation.navigate("Instruction");
+    this.props.navigation.navigate("AlfaInstruction");
   };
   render() {
     const {
