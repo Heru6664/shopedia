@@ -58,6 +58,10 @@ class Result extends Component {
               </Text>
             </CardItem>
           </Card>
+          <Text>Select payment method</Text>
+          <Button onPress={() => this.props.navigation.navigate("Bill")}>
+            <Text>Open Invoice</Text>
+          </Button>
         </Content>
       </Container>
     );

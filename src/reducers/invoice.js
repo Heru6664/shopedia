@@ -46,8 +46,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        invoice: [...state.invoice]
+        invoice: action.payload
       };
+
     default:
       return state;
   }

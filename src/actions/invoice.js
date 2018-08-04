@@ -66,21 +66,24 @@ const getInvoiceSuccess = data => ({
   type: GET_INVOICE_SUCCESS,
   payload: data
 });
-
 export const getInvoice = data => dispatch => {
-  dispatch(getInvoiceStart());
-  return axios
-    .get(`https://api.xendit.co/v2/invoices/${data}`, {
-      auth: {
-        username:
-          "xnd_development_Po6AfL4i1LP+nZNtfuBPHj6TM9GkqIMowia0+Rxg/mTW+bykDQB0gA==",
-        password: ""
-      }
-    })
-    .then(res => {
-      dispatch(getInvoiceSuccess(res.data));
-    })
-    .catch(e => {
-      dispatch(getInvoiceFailed(e.data));
-    });
+  return new Promise((resolve, reject) => {
+    dispatch(getInvoiceStart());
+    return axios
+      .get(`https://api.xendit.co/v2/invoices/${data}`, {
+        auth: {
+          username:
+            "xnd_development_Po6AfL4i1LP+nZNtfuBPHj6TM9GkqIMowia0+Rxg/mTW+bykDQB0gA==",
+          password: ""
+        }
+      })
+      .then(res => {
+        dispatch(getInvoiceSuccess(res.data));
+        return resolve(true);
+      })
+      .catch(e => {
+        dispatch(getInvoiceFailed(e.data));
+        return reject(true);
+      });
+  });
 };
