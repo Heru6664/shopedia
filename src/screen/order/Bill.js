@@ -12,7 +12,8 @@ import {
   Right,
   Text,
   Title,
-  View
+  View,
+  CardItem
 } from "native-base";
 import React, { Component } from "react";
 import { FlatList } from "react-native";
@@ -23,6 +24,7 @@ import { addPaymentMethod } from "../../actions/order";
 import Loading from "../../assets/components/Loading";
 import { DefaultStatusBar } from "../../assets/components/StatusBar";
 import { days, months } from "./Constant/Result";
+import styles from "./style/Bill";
 
 class Pending extends Component {
   constructor(props) {
@@ -35,10 +37,7 @@ class Pending extends Component {
     };
   }
   componentWillMount() {
-    this.props
-      .getInvoice(this.props.invoice.id)
-      .then(() => console.log("get success"))
-      .catch(e => console.log(e));
+    this.props.list;
   }
   toggleExpanded = () => {
     this.setState({ collapsed: !this.state.collapsed });
@@ -61,98 +60,97 @@ class Pending extends Component {
     this.props.navigation.navigate("AlfaInstruction");
   };
   render() {
-    const {
-      external_id,
-      status,
-      amount,
-      payer_email,
-      description,
-      available_banks,
-      available_retail_outlets
-    } = this.props.invoice;
-    const date = new Date(this.props.invoice.expiry_date);
-
-    let hours = date.getHours();
-    let mins = date.getMinutes();
-    let secs = date.getSeconds();
-    let dates = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
     return (
       <Content>
-        {this.props.loading ? (
-          <Loading style={{ width: 50, height: 50 }} />
-        ) : (
-          <View>
-            <View>
-              <ListItem onPress={() => this.toggleExpanded()}>
-                <Left>
-                  <Text>{description}</Text>
-                </Left>
-                <Badge warning>
-                  <Text>{status}</Text>
-                </Badge>
-              </ListItem>
-            </View>
-            <Collapsible collapsed={this.state.collapsed}>
+        <FlatList
+          data={this.props.list}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => {
+            const date = new Date(item.expiry_date);
+
+            let hours = date.getHours();
+            let mins = date.getMinutes();
+            let secs = date.getSeconds();
+            let dates = date.getDate();
+            let month = date.getMonth();
+            let year = date.getFullYear();
+            return (
               <View>
-                <Text>
-                  (Pay before {days[dates]} , {dates} {months[month]} {year},{" "}
-                  {hours}:{mins})
-                </Text>
-                <Text>External Id : {external_id}</Text>
-                <Text>
-                  Total Amount :{" "}
-                  {accounting.formatMoney(amount, "IDR ", ",", ".")}
-                </Text>
-                <Text>Payer Email : {payer_email}</Text>
                 <View>
-                  <ListItem onPress={() => this.expandMethod()}>
+                  <ListItem onPress={() => this.toggleExpanded()}>
                     <Left>
-                      <Text>Select Payment Method</Text>
+                      <Text>{item.description}</Text>
                     </Left>
+                    <Badge warning>
+                      <Text>{item.status}</Text>
+                    </Badge>
                   </ListItem>
                 </View>
-                <Collapsible collapsed={this.state.method}>
+                <Collapsible collapsed={this.state.collapsed}>
                   <View>
-                    <ListItem onPress={() => this.expandBanks()}>
-                      <Text>Bank Transfer</Text>
-                    </ListItem>
-                    <Collapsible collapsed={this.state.banks}>
-                      <FlatList
-                        data={available_banks}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => (
-                          <View>
-                            <ListItem onPress={() => this.bankMethod(item)}>
-                              <Text>{item.bank_code}</Text>
-                            </ListItem>
-                          </View>
-                        )}
-                      />
-                    </Collapsible>
-                    <ListItem onPress={() => this.expandRetail()}>
-                      <Text>Retail Outlet</Text>
-                    </ListItem>
-                    <Collapsible collapsed={this.state.retail}>
-                      <FlatList
-                        data={available_retail_outlets}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => (
-                          <View>
-                            <ListItem onPress={() => this.retailMethod(item)}>
-                              <Text>{item.retail_outlet_name}</Text>
-                            </ListItem>
-                          </View>
-                        )}
-                      />
+                    <Text>
+                      (Pay before {days[dates]} , {dates} {months[month]} {year},{" "}
+                      {hours}:{mins})
+                    </Text>
+                    <Text>External Id : {item.external_id}</Text>
+                    <Text>
+                      Total Amount :{" "}
+                      {accounting.formatMoney(item.amount, "IDR ", ",", ".")}
+                    </Text>
+                    <Text>Payer Email : {item.payer_email}</Text>
+                    <View>
+                      <ListItem onPress={() => this.expandMethod()}>
+                        <Left>
+                          <Text>Select Payment Method</Text>
+                        </Left>
+                      </ListItem>
+                    </View>
+                    <Collapsible collapsed={this.state.method}>
+                      <View>
+                        <ListItem onPress={() => this.expandBanks()}>
+                          <Text>Bank Transfer</Text>
+                        </ListItem>
+                        <Collapsible collapsed={this.state.banks}>
+                          <FlatList
+                            data={item.available_banks}
+                            keyExtractor={(item, index) => index.toString()}
+                            listKey={(item, index) => "D" + index.toString()}
+                            renderItem={({ item }) => (
+                              <View>
+                                <ListItem onPress={() => this.bankMethod(item)}>
+                                  <Text>{item.bank_code}</Text>
+                                </ListItem>
+                              </View>
+                            )}
+                          />
+                        </Collapsible>
+                        <ListItem onPress={() => this.expandRetail()}>
+                          <Text>Retail Outlet</Text>
+                        </ListItem>
+                        <Collapsible collapsed={this.state.retail}>
+                          <FlatList
+                            data={item.available_retail_outlets}
+                            keyExtractor={(item, index) => index.toString()}
+                            listKey={(item, index) => "D" + index.toString()}
+                            renderItem={({ item }) => (
+                              <View>
+                                <ListItem
+                                  onPress={() => this.retailMethod(item)}
+                                >
+                                  <Text>{item.retail_outlet_name}</Text>
+                                </ListItem>
+                              </View>
+                            )}
+                          />
+                        </Collapsible>
+                      </View>
                     </Collapsible>
                   </View>
                 </Collapsible>
               </View>
-            </Collapsible>
-          </View>
-        )}
+            );
+          }}
+        />
       </Content>
     );
   }
@@ -162,18 +160,21 @@ class Settled extends Component {
   render() {
     return (
       <Content>
-        <Left>
-          <Icon name="check" type="EvilIcons" />
-          <Text>Thank you</Text>
-          <Text>Your payment has been success</Text>
-        </Left>
-        <Right>
-          <Badge success>
-            <Text>{this.props.invoice.status}</Text>
-          </Badge>
-        </Right>
+        <View style={styles.head}>
+          <Icon style={styles.icon} name="check" type="EvilIcons" />
+          <Text style={styles.contentHead}>Thank you</Text>
+          <Text style={styles.contentHead}>Your payment was successful</Text>
+          <Body />
+        </View>
         <View>
-          <Text>Review</Text>
+          <CardItem header>
+            <Text>Review</Text>
+            <Right>
+              <Badge success>
+                <Text>{this.props.invoice.status}</Text>
+              </Badge>
+            </Right>
+          </CardItem>
           <ListItem>
             <Text>Total amount : </Text>
             <Text>
@@ -186,8 +187,15 @@ class Settled extends Component {
             </Text>
           </ListItem>
           <ListItem>
-            <Text>Paid amount</Text>
-            <Text>{this.props.invoice.paid_amount}</Text>
+            <Text>Paid amount : </Text>
+            <Text>
+              {accounting.formatMoney(
+                this.props.invoice.paid_amount,
+                "IDR ",
+                ",",
+                "."
+              )}
+            </Text>
           </ListItem>
           <ListItem>
             <Text>Name to: </Text>
@@ -205,7 +213,6 @@ class Settled extends Component {
 
 class Bill extends Component {
   render() {
-    const checkStatus = this.props.invoice.status;
     return (
       <Container>
         <DefaultStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
@@ -220,15 +227,8 @@ class Bill extends Component {
           </Body>
           <Right />
         </Header>
-        {checkStatus === "PENDING" ? (
-          <Pending {...this.props} />
-        ) : checkStatus === "SETTLED" ? (
-          <Settled {...this.props} />
-        ) : checkStatus === "EXPIRED" ? (
-          console.log("EXpired")
-        ) : (
-          console.log("empty")
-        )}
+        <Pending {...this.props} />
+        <Settled {...this.props} />
       </Container>
     );
   }
@@ -237,6 +237,7 @@ class Bill extends Component {
 const mapStateToProps = ({ invoice, auth }) => ({
   invoice: invoice.invoice,
   user: auth.user.fullname,
+  list: invoice.invoicesList,
   loading: invoice.loading
 });
 

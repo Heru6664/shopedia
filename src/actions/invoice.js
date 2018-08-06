@@ -5,7 +5,8 @@ import {
   CREATE_INVOICE_FAILED,
   GET_INVOICE_START,
   GET_INVOICE_FAILED,
-  GET_INVOICE_SUCCESS
+  GET_INVOICE_SUCCESS,
+  ADD_INVOICES_LIST
 } from "./constant/invoice";
 import faker from "faker";
 
@@ -46,11 +47,13 @@ export const createInvoice = item => dispatch => {
       )
       .then(response => {
         dispatch(createInvoiceSuccess(response.data));
+        dispatch(addInvoicesList(response.data));
         return resolve(true);
       })
       .catch(error => {
         dispatch(createInvoiceFailed(error));
-        reject(true);
+        console.log("invoices err: ", error);
+        return reject(true);
       });
   });
 };
@@ -87,3 +90,8 @@ export const getInvoice = data => dispatch => {
       });
   });
 };
+
+export const addInvoicesList = list => ({
+  type: ADD_INVOICES_LIST,
+  payload: list
+});

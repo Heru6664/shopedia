@@ -4,12 +4,14 @@ import {
   CREATE_INVOICE_SUCCESS,
   GET_INVOICE_START,
   GET_INVOICE_FAILED,
-  GET_INVOICE_SUCCESS
+  GET_INVOICE_SUCCESS,
+  ADD_INVOICES_LIST
 } from "../actions/constant/invoice";
 
 const initialState = {
   loading: false,
-  invoice: []
+  invoice: {},
+  invoicesList: []
 };
 
 export default (state = initialState, action) => {
@@ -22,8 +24,7 @@ export default (state = initialState, action) => {
     case CREATE_INVOICE_FAILED:
       return {
         ...state,
-        loading: false,
-        invoice: action.payload
+        loading: false
       };
     case CREATE_INVOICE_SUCCESS:
       return {
@@ -39,8 +40,7 @@ export default (state = initialState, action) => {
     case GET_INVOICE_FAILED:
       return {
         ...state,
-        loading: false,
-        invoice: action.payload
+        loading: false
       };
     case GET_INVOICE_SUCCESS:
       return {
@@ -48,7 +48,11 @@ export default (state = initialState, action) => {
         loading: false,
         invoice: action.payload
       };
-
+    case ADD_INVOICES_LIST:
+      return {
+        ...state,
+        invoicesList: [...state.invoicesList, action.payload]
+      };
     default:
       return state;
   }

@@ -47,7 +47,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "MainScreen"
+    initialRouteName: "Bill"
   }
 );
 
