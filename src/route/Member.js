@@ -23,9 +23,11 @@ import SettingAccount from "../screen/user/SettingAccount";
 import AlfaInstruction from "../screen/order/AlfaInstruction";
 import Result from "../screen/order/Result";
 import ShoppingList from "../screen/order/ShoppingList";
+import CCInstruction from "../screen/order/CCInstruction";
 
 const navigation = createStackNavigator(
   {
+    CCInstruction: CCInstruction,
     ShoppingList: ShoppingList,
     Result: Result,
     AlfaInstruction: AlfaInstruction,
@@ -47,7 +49,7 @@ const navigation = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Bill"
+    initialRouteName: "CCInstruction"
   }
 );
 

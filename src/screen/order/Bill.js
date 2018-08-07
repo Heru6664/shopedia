@@ -58,6 +58,10 @@ class Pending extends Component {
     this.props.addPaymentMethod(item.bank_code);
     this.props.navigation.navigate("Instruction");
   };
+  CCmethod = () => {
+    this.props.addPaymentMethod("Credit Card");
+    this.props.navigation.navigate("CCInstruction");
+  };
   retailMethod = item => {
     this.props.addPaymentMethod(item.retail_outlet_name);
     this.props.navigation.navigate("AlfaInstruction");
@@ -246,7 +250,10 @@ class Pending extends Component {
                         )}
                       />
                     </Collapsible>
-                    <ListItem style={styles.headerChild}>
+                    <ListItem
+                      onPress={() => this.CCmethod()}
+                      style={styles.headerChild}
+                    >
                       <Left>
                         <Text style={styles.contentText}>Credit Card</Text>
                       </Left>
